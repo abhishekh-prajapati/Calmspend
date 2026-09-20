@@ -1,0 +1,30 @@
+.ui-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-3);
+  padding: 0 var(--spacing-1);
+}
+
+.ui-section-header__titles {
+  display: flex;
+  flex-direction: column;
+}
+
+.ui-section-header__title {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  letter-spacing: var(--letter-spacing-h2);
+}
+
+.ui-section-header__subtitle {
+  font-size: var(--font-size-caption);
+  color: var(--color-text-muted);
+}
+
+.ui-section-header__action {
+  font-size: var(--font-size-body-sm);
+  color: var(--color-primary);
+  font-weight: var(--font-weight-medium);
+}

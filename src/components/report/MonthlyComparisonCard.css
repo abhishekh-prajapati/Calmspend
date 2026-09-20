@@ -1,0 +1,163 @@
+.monthly-comparison-card {
+  margin-bottom: 24px;
+}
+
+/* Desktop Table Layout */
+.comparison-table {
+  background: var(--color-surface-subtle, rgba(255, 255, 255, 0.02));
+  border-radius: var(--radius-lg, 12px);
+  border: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.05));
+  overflow: hidden;
+}
+
+.comp-head-row {
+  display: grid;
+  grid-template-columns: 1.8fr 1.1fr 1.1fr 1.1fr;
+  padding: 10px 14px;
+  background: var(--color-surface-subtle, rgba(255, 255, 255, 0.03));
+  border-bottom: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.05));
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--color-text-secondary, #94a3b8);
+}
+
+.comp-data-row {
+  display: grid;
+  grid-template-columns: 1.8fr 1.1fr 1.1fr 1.1fr;
+  align-items: center;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--color-border-subtle, rgba(255, 255, 255, 0.03));
+  font-size: 13px;
+  gap: 8px;
+}
+
+.comp-data-row:last-child {
+  border-bottom: none;
+}
+
+.comp-data-row-highlight {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.comp-metric-name {
+  font-weight: 600;
+  color: var(--color-text-primary, #0f172a);
+}
+
+.comp-val-prev {
+  color: var(--color-text-secondary, #64748b);
+  font-weight: 500;
+}
+
+.comp-val-curr {
+  color: var(--color-text-primary, #0f172a);
+  font-weight: 600;
+}
+
+.comp-delta {
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.delta-pos {
+  color: #10b981;
+}
+
+.delta-neg {
+  color: #ef4444;
+}
+
+.delta-neu {
+  color: #64748b;
+}
+
+/* Mobile Adaptive Card List */
+.comp-mobile-list {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.comp-mobile-card {
+  background: var(--color-surface-subtle, #f8fafc);
+  border: 1px solid var(--color-border-subtle, #e2e8f0);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.comp-mobile-card--highlight {
+  background: rgba(59, 130, 246, 0.05);
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+.comp-mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.comp-mobile-metric {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-text-primary, #0f172a);
+}
+
+.comp-mobile-delta {
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.comp-mobile-values {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.comp-mobile-val-box {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.comp-mobile-val-box--curr {
+  text-align: right;
+}
+
+.comp-mobile-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--color-text-secondary, #64748b);
+}
+
+.comp-mobile-amount {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.comp-mobile-arrow {
+  color: var(--color-text-muted, #94a3b8);
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 600px) {
+  .comp-desktop-only {
+    display: none;
+  }
+
+  .comp-mobile-list {
+    display: flex;
+  }
+}

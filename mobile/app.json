@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "PBP Finance",
+    "slug": "pbp-finance",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": false,
+    "splash": {
+      "backgroundColor": "#090d16",
+      "resizeMode": "contain"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.pbp.finance"
+    },
+    "android": {
+      "package": "com.pbp.finance",
+      "adaptiveIcon": {
+        "backgroundColor": "#090d16"
+      },
+      "softwareKeyboardLayoutMode": "pan"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-asset"
+    ]
+  }
+}

@@ -1,0 +1,168 @@
+.account-flow-card {
+  margin-bottom: 24px;
+}
+
+.account-flow-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.account-flow-item {
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.acc-flow-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.acc-name-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.acc-icon {
+  color: #3b82f6;
+}
+
+.acc-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary, #f8fafc);
+}
+
+.acc-balance-badge {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-secondary, #94a3b8);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.acc-flow-breakdown {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.flow-metric {
+  display: flex;
+  flex-direction: column;
+}
+
+.flow-lbl {
+  font-size: 11px;
+  color: var(--color-text-tertiary, #64748b);
+  font-weight: 500;
+}
+
+.flow-val {
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.val-green {
+  color: #10b981;
+}
+
+.val-red {
+  color: #ef4444;
+}
+
+.val-cyan {
+  color: #38bdf8;
+}
+
+.val-amber {
+  color: #f59e0b;
+}
+
+.transfers-section {
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  margin-bottom: 16px;
+}
+
+.transfers-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-primary, #f8fafc);
+  margin-bottom: 10px;
+}
+
+.transfers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.transfer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.transfer-accounts {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.transfer-from {
+  color: var(--color-text-secondary, #94a3b8);
+}
+
+.transfer-arrow {
+  color: #64748b;
+  font-size: 10px;
+}
+
+.transfer-to {
+  color: var(--color-text-primary, #f8fafc);
+  font-weight: 500;
+}
+
+.transfer-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.transfer-amount {
+  font-weight: 600;
+  color: #38bdf8;
+}
+
+.transfer-date {
+  color: #64748b;
+  font-size: 11px;
+}
+
+.account-flow-disclaimer {
+  font-size: 11px;
+  color: var(--color-text-tertiary, #64748b);
+  line-height: 1.4;
+}

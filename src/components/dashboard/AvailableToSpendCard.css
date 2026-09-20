@@ -1,0 +1,108 @@
+.available-to-spend-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+}
+
+.available-to-spend-card__header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+  margin-bottom: var(--spacing-2);
+}
+
+.available-to-spend-card__icon-badge {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-primary-subtle);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.available-to-spend-card__titles {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.available-to-spend-card__title {
+  color: var(--color-text-primary);
+  line-height: 1.25;
+}
+
+.available-to-spend-card__subtitle {
+  color: var(--color-text-muted);
+  margin-top: 1px;
+}
+
+.available-to-spend-card__amount-row {
+  margin-left: calc(34px + var(--spacing-3));
+  margin-bottom: var(--spacing-1);
+}
+
+.available-to-spend-card__amount {
+  color: var(--color-primary);
+  letter-spacing: var(--letter-spacing-h1);
+}
+
+.available-to-spend-card__daily-divider {
+  border-top: 1px dashed var(--color-border);
+  margin: 0;
+  width: 100%;
+}
+
+.available-to-spend-card__daily-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-1);
+}
+
+.available-to-spend-card__daily-label-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  color: var(--color-text-secondary);
+}
+
+.available-to-spend-card__daily-icon {
+  color: var(--color-text-muted);
+}
+
+.available-to-spend-card__daily-amount {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.available-to-spend-card__adjust-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background-color: rgba(44, 103, 197, 0.08);
+  border: 1px solid rgba(44, 103, 197, 0.2);
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.available-to-spend-card__adjust-btn:hover {
+  background-color: rgba(44, 103, 197, 0.16);
+  border-color: var(--color-primary);
+}
+
+.available-to-spend-card__empty-hint {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-style: italic;
+  padding-top: var(--spacing-1);
+}

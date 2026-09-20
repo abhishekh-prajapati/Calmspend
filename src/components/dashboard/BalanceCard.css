@@ -1,0 +1,73 @@
+.balance-card {
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--color-primary-subtle) 100%);
+  border: 1.5px solid var(--color-primary-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.balance-card::after {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 120px;
+  height: 120px;
+  border-radius: var(--radius-pill);
+  background: radial-gradient(circle, rgba(44, 103, 197, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.balance-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-3);
+}
+
+.balance-card__label-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.balance-card__icon-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.balance-card__label {
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+.balance-card__amount-container {
+  margin-bottom: var(--spacing-3);
+}
+
+.balance-card__amount {
+  font-size: var(--font-size-display);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-text-primary);
+  letter-spacing: var(--letter-spacing-display);
+  line-height: 1.1;
+  word-break: break-word;
+}
+
+.balance-card__footer {
+  display: flex;
+  align-items: center;
+  padding-top: var(--spacing-2);
+  border-top: 1px solid rgba(226, 232, 240, 0.6);
+}
+
+.balance-card__footer-hint {
+  color: var(--color-text-muted);
+}

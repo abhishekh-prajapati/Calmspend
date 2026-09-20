@@ -1,0 +1,128 @@
+.ui-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.ui-bottom-nav__container {
+  pointer-events: auto;
+  width: 100%;
+  max-width: var(--app-max-width);
+  height: calc(var(--bottom-nav-height) + var(--safe-area-bottom));
+  padding-bottom: var(--safe-area-bottom);
+  background-color: rgba(247, 250, 246, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(224, 227, 224, 0.8);
+  box-shadow: 0 -2px 12px rgba(45, 106, 79, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-left: 8px;
+  padding-right: 8px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.ui-bottom-nav__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  flex: 1;
+  min-height: 52px;
+  min-width: 52px;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  border-radius: var(--radius-md);
+}
+
+.ui-bottom-nav__icon {
+  font-size: 24px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-fast);
+}
+
+.ui-bottom-nav__label {
+  font-size: var(--font-size-nav);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.2;
+}
+
+.ui-bottom-nav__item:hover {
+  color: var(--color-text-primary);
+}
+
+.ui-bottom-nav__item:active {
+  transform: scale(0.94);
+}
+
+.ui-bottom-nav__item--active {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.ui-bottom-nav__item--active .ui-bottom-nav__label {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+}
+
+/* Center Elevated FAB Slot */
+.ui-bottom-nav__center-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: -20px;
+  margin-left: 4px;
+  margin-right: 4px;
+  flex-shrink: 0;
+}
+
+.ui-bottom-nav__fab-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-primary-container);
+  color: var(--color-text-inverse);
+  box-shadow: 0 4px 14px rgba(45, 106, 79, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--color-surface);
+  cursor: pointer;
+  transition: transform var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.ui-bottom-nav__fab-btn:hover {
+  transform: scale(1.05);
+  background-color: var(--color-primary);
+}
+
+.ui-bottom-nav__fab-btn:active {
+  transform: scale(0.95);
+}
+
+.ui-bottom-nav__fab-icon {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.ui-bottom-nav__fab-label {
+  font-size: var(--font-size-nav);
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+  margin-top: 2px;
+}

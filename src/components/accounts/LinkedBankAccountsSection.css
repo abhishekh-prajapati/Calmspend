@@ -1,0 +1,207 @@
+.calm-linked-banks-container {
+  background-color: var(--color-surface-container-lowest);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-4);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.calm-linked-banks-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.calm-linked-banks-title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.calm-linked-banks-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.calm-linked-banks-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-primary);
+  background-color: var(--color-primary-container);
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.calm-linked-banks-connect-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 38px;
+  padding: 0 12px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-primary);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: opacity var(--transition-fast);
+}
+
+.calm-linked-banks-connect-btn:hover {
+  opacity: 0.9;
+}
+
+.calm-sync-feedback {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background-color: var(--color-surface-container-low);
+  border-radius: var(--radius-lg);
+  font-size: 12px;
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+.calm-linked-banks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.calm-linked-bank-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-radius: var(--radius-lg);
+  background-color: var(--color-surface-container-low);
+  border: 1px solid var(--color-border);
+}
+
+.calm-linked-bank-card__left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.calm-linked-bank-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-lg);
+  background-color: var(--color-primary-container);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calm-linked-bank-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.calm-linked-bank-name-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.calm-linked-bank-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.calm-linked-bank-type-pill {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  background-color: var(--color-surface-container);
+  padding: 2px 6px;
+  border-radius: var(--radius-pill);
+}
+
+.calm-linked-bank-sub {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+
+.calm-linked-bank-card__right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.calm-linked-bank-balance {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--color-text-primary);
+}
+
+.calm-sync-now-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 28px;
+  padding: 0 8px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-surface-container);
+  border: 1px solid var(--color-border);
+  color: var(--color-primary);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.calm-sync-now-btn:hover {
+  background-color: var(--color-primary-container);
+}
+
+.calm-linked-banks-empty {
+  text-align: center;
+  padding: 20px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.calm-empty-icon {
+  font-size: 32px;
+  color: var(--color-text-secondary);
+  margin-bottom: 6px;
+}
+
+.calm-empty-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0 0 4px;
+}
+
+.calm-empty-desc {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  max-width: 320px;
+  margin: 0 0 12px;
+}
+
+.calm-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

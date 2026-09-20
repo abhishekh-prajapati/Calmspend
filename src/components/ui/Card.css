@@ -1,0 +1,57 @@
+.ui-card {
+  background-color: var(--color-surface);
+  box-sizing: border-box;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Card Variants */
+.ui-card--default {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+.ui-card--subtle {
+  background-color: var(--color-surface-secondary);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.ui-card--outlined {
+  background-color: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  box-shadow: none;
+}
+
+.ui-card--elevated {
+  background-color: var(--color-surface);
+  border-color: transparent;
+  box-shadow: var(--shadow-md);
+}
+
+.ui-card--interactive {
+  cursor: pointer;
+}
+
+.ui-card--interactive:hover {
+  border-color: var(--color-primary-light);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.ui-card--interactive:active {
+  transform: scale(0.99);
+}
+
+/* Padding scale */
+.ui-card--pad-none { padding: 0; }
+.ui-card--pad-sm { padding: var(--spacing-2); }
+.ui-card--pad-md { padding: var(--spacing-4); }
+.ui-card--pad-lg { padding: var(--spacing-6); }
+
+/* Radius scale */
+.ui-card--rad-sm { border-radius: var(--radius-sm); }
+.ui-card--rad-md { border-radius: var(--radius-md); }
+.ui-card--rad-lg { border-radius: var(--radius-lg); }
+.ui-card--rad-xl { border-radius: var(--radius-xl); }

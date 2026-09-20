@@ -1,0 +1,132 @@
+.financial-overview-card {
+  margin-bottom: 24px;
+  background: var(--color-surface, #FFFFFF);
+  border: 1px solid var(--color-border, #E2E8F0);
+  box-shadow: var(--shadow-sm);
+}
+
+.overview-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.overview-subtitle {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted, #94A3B8);
+  font-weight: 600;
+}
+
+.overview-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text-primary, #0F172A);
+  margin-top: 2px;
+}
+
+.overview-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+}
+
+.stat-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  background: var(--color-surface-secondary, #F8FAFC);
+  border-radius: var(--radius-md, 12px);
+  border: 1px solid var(--color-border-subtle, #E2E8F0);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-box:hover {
+  border-color: var(--color-border, #CBD5E1);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
+.stat-icon-wrapper {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.income-icon {
+  background: var(--color-success-light, #ECFDF5);
+  color: var(--color-success, #10B981);
+}
+
+.expense-icon {
+  background: var(--color-danger-light, #FEF2F2);
+  color: var(--color-danger, #EF4444);
+}
+
+.savings-icon-pos {
+  background: var(--color-primary-light, #EBF2FC);
+  color: var(--color-primary, #2C67C5);
+}
+
+.savings-icon-neg {
+  background: var(--color-warning-light, #FFFBEB);
+  color: var(--color-warning, #F59E0B);
+}
+
+.rate-icon-wrapper {
+  background: var(--color-primary-light, #EBF2FC);
+  color: var(--color-primary, #2C67C5);
+}
+
+.stat-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--color-text-secondary, #475569);
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.stat-value {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.income-val {
+  color: var(--color-success, #10B981);
+}
+
+.expense-val {
+  color: var(--color-danger, #EF4444);
+}
+
+.savings-val-pos {
+  color: var(--color-primary, #2C67C5);
+}
+
+.savings-val-neg {
+  color: var(--color-warning, #F59E0B);
+}
+
+.rate-val {
+  color: var(--color-text-primary, #0F172A);
+}
+
+.stat-subtext {
+  font-size: 11px;
+  color: var(--color-text-muted, #94A3B8);
+  margin-top: 4px;
+}

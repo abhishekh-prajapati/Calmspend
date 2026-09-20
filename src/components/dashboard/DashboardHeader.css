@@ -1,0 +1,57 @@
+.dashboard-header {
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--page-padding);
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border-subtle);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  gap: var(--spacing-3);
+  flex-shrink: 0;
+}
+
+.dashboard-header__left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.dashboard-header__app-name {
+  font-size: var(--font-size-caption);
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.dashboard-header__period-container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  margin-top: 2px;
+}
+
+.dashboard-header__period-icon {
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.dashboard-header__period-title {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  letter-spacing: var(--letter-spacing-h1);
+  line-height: 1.2;
+}
+
+.dashboard-header__right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex-shrink: 0;
+}

@@ -1,0 +1,93 @@
+.financial-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-2);
+  width: 100%;
+}
+
+.financial-summary-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--spacing-3) var(--spacing-2);
+  min-width: 0;
+  transition: transform var(--transition-fast);
+}
+
+.financial-summary-card__header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: var(--spacing-2);
+}
+
+.financial-summary-card__icon-wrap {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.financial-summary-card__label {
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.financial-summary-card__amount-wrap {
+  min-width: 0;
+}
+
+.financial-summary-card__amount {
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.financial-summary-card__amount--pending {
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+}
+
+/* Income Variant */
+.financial-summary-card--income .financial-summary-card__icon-wrap {
+  background-color: var(--color-success-light);
+  color: var(--color-success);
+}
+.financial-summary-card--income .financial-summary-card__label {
+  color: var(--color-success-text);
+}
+
+/* Expenses Variant */
+.financial-summary-card--expenses .financial-summary-card__icon-wrap {
+  background-color: var(--color-danger-light);
+  color: var(--color-danger);
+}
+.financial-summary-card--expenses .financial-summary-card__label {
+  color: var(--color-danger-text);
+}
+
+/* Savings Variant */
+.financial-summary-card--savings .financial-summary-card__icon-wrap {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+.financial-summary-card--savings .financial-summary-card__label {
+  color: var(--color-primary-text);
+}
+
+/* Fallback for ultra-narrow screens under 360px */
+@media (max-width: 350px) {
+  .financial-summary-grid {
+    grid-template-columns: 1fr;
+  }
+}

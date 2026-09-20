@@ -1,0 +1,150 @@
+.quick-pay-modal {
+  background: var(--color-surface-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2xl, 18px);
+  width: 100%;
+  max-width: 480px;
+  padding: var(--spacing-4, 16px);
+  box-shadow: var(--shadow-xl, 0 20px 25px -5px rgba(0, 0, 0, 0.25));
+  animation: quickPaySlideUp 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3, 12px);
+}
+
+@keyframes quickPaySlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.quick-pay-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--spacing-3, 12px);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.quick-pay-modal__title-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3, 12px);
+}
+
+.quick-pay-modal__cat-badge {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-lg, 12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.quick-pay-modal__title {
+  font-size: var(--font-size-heading-3, 18px);
+  font-weight: var(--font-weight-bold, 700);
+  color: var(--color-text-primary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.quick-pay-modal__subtitle {
+  font-size: var(--font-size-caption, 12px);
+  color: var(--color-text-secondary);
+}
+
+.quick-pay-modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3, 12px);
+}
+
+.quick-pay-modal__error-banner {
+  background-color: var(--color-danger-light, rgba(239, 68, 68, 0.1));
+  color: var(--color-danger, #ef4444);
+  padding: 8px 12px;
+  border-radius: var(--radius-md, 8px);
+  font-size: var(--font-size-body-sm, 13px);
+  font-weight: 500;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.quick-pay-modal__form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.quick-pay-modal__amount-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.quick-pay-modal__currency-prefix {
+  position: absolute;
+  left: 14px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-primary);
+  pointer-events: none;
+}
+
+.quick-pay-modal__amount-input {
+  width: 100%;
+  padding: 10px 14px 10px 32px;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  background: var(--color-surface-subtle);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg, 12px);
+  outline: none;
+  transition: all 0.15s ease;
+}
+
+.quick-pay-modal__amount-input:focus {
+  border-color: var(--color-primary);
+  background: var(--color-surface-card);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.quick-pay-modal__select,
+.quick-pay-modal__input {
+  width: 100%;
+  padding: 9px 12px;
+  font-size: var(--font-size-body-sm, 14px);
+  color: var(--color-text-primary);
+  background: var(--color-surface-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md, 8px);
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.quick-pay-modal__select:focus,
+.quick-pay-modal__input:focus {
+  border-color: var(--color-primary);
+  background: var(--color-surface-card);
+}
+
+.quick-pay-modal__row {
+  display: flex;
+  gap: var(--spacing-2, 8px);
+}
+
+.quick-pay-modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-2, 8px);
+  margin-top: var(--spacing-2, 8px);
+  padding-top: var(--spacing-3, 12px);
+  border-top: 1px solid var(--color-border-subtle);
+}

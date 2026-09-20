@@ -1,0 +1,93 @@
+.calm-bank-connect-sheet {
+  max-width: 480px;
+}
+
+.calm-bank-connect-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.calm-bank-connect-icon {
+  font-size: 32px;
+  color: var(--color-primary);
+  background-color: var(--color-primary-container);
+  padding: 8px;
+  border-radius: var(--radius-lg);
+}
+
+.calm-bank-connect-sub {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin: 2px 0 0;
+}
+
+.calm-aa-disclosure-box {
+  background-color: var(--color-surface-container-low);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.calm-aa-disclosure-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--color-text-primary);
+  line-height: 1.4;
+}
+
+.calm-aa-disclosure-row .material-symbols-outlined {
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.calm-bank-input-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin-top: 6px;
+}
+
+.calm-bank-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.calm-bank-input-prefix {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  background-color: var(--color-surface-container-low);
+  padding: 12px 14px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+}
+
+.calm-aa-preset-row {
+  display: flex;
+  margin-top: 4px;
+}
+
+.calm-bank-error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-terracotta);
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.calm-bank-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}

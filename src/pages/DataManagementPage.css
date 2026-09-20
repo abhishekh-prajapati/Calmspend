@@ -1,0 +1,515 @@
+/* ============================================================
+   STAGE 11 — DATA MANAGEMENT PAGE STYLES
+   ============================================================ */
+
+.dm-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.dm-page .page-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 40px;
+}
+
+/* ---- Section Groups ---- */
+.dm-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ---- Info / storage card ---- */
+.dm-storage-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dm-storage-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dm-storage-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.dm-storage-size {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  font-family: var(--font-family-mono);
+}
+
+.dm-collection-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px 12px;
+}
+
+.dm-collection-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+
+.dm-collection-label {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+
+.dm-collection-count {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  font-family: var(--font-family-mono);
+}
+
+/* ---- Action Items ---- */
+.dm-action-list {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.dm-action-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  border-bottom: 1px solid var(--color-border-subtle);
+  user-select: none;
+  background: transparent;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  width: 100%;
+  text-align: left;
+}
+
+.dm-action-item:last-child {
+  border-bottom: none;
+}
+
+.dm-action-item:hover {
+  background: var(--color-bg-subtle);
+}
+
+.dm-action-item:active {
+  background: var(--color-surface-secondary);
+}
+
+.dm-action-item--disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.dm-action-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dm-action-icon--primary {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.dm-action-icon--success {
+  background: var(--color-success-light);
+  color: var(--color-success-text);
+}
+
+.dm-action-icon--warning {
+  background: var(--color-warning-light);
+  color: var(--color-warning-text);
+}
+
+.dm-action-icon--danger {
+  background: var(--color-danger-light);
+  color: var(--color-danger-text);
+}
+
+.dm-action-icon--info {
+  background: var(--color-info-light);
+  color: var(--color-info-text);
+}
+
+.dm-action-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.dm-action-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  line-height: 1.3;
+}
+
+.dm-action-subtitle {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+  line-height: 1.3;
+}
+
+.dm-action-chevron {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+/* ---- Safety backup banner ---- */
+.dm-safety-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--color-warning-light);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: var(--radius-md);
+}
+
+.dm-safety-banner-text {
+  flex: 1;
+  font-size: 12px;
+  color: var(--color-warning-text);
+  line-height: 1.4;
+}
+
+.dm-safety-banner-clear {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-warning-text);
+  text-decoration: underline;
+  cursor: pointer;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* ============================================================
+   RESTORE MODAL
+   ============================================================ */
+
+.dm-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 1000;
+  padding: 0;
+  animation: dm-backdrop-in 200ms ease;
+}
+
+@keyframes dm-backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.dm-modal {
+  background: var(--color-surface);
+  border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+  width: 100%;
+  max-width: 430px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-floating);
+  animation: dm-sheet-in 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes dm-sheet-in {
+  from { transform: translateY(60px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.dm-modal-handle {
+  width: 36px;
+  height: 4px;
+  background: var(--color-surface-tertiary);
+  border-radius: 2px;
+  margin: 12px auto 4px;
+}
+
+.dm-modal-header {
+  padding: 12px 20px 14px;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.dm-modal-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.dm-modal-subtitle {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin: 3px 0 0;
+}
+
+.dm-modal-body {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.dm-modal-footer {
+  padding: 12px 20px 24px;
+  display: flex;
+  gap: 10px;
+}
+
+/* ---- Drop Zone ---- */
+.dm-dropzone {
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+  text-align: center;
+}
+
+.dm-dropzone:hover,
+.dm-dropzone--active {
+  border-color: var(--color-primary);
+  background: var(--color-primary-subtle);
+}
+
+.dm-dropzone-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.dm-dropzone-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.dm-dropzone-hint {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.dm-dropzone input[type="file"] {
+  display: none;
+}
+
+/* ---- Preview Panel ---- */
+.dm-preview-panel {
+  background: var(--color-bg-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dm-preview-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dm-preview-label {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.dm-preview-value {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  font-family: var(--font-family-mono);
+}
+
+.dm-preview-divider {
+  height: 1px;
+  background: var(--color-border);
+  margin: 2px 0;
+}
+
+/* ---- Validation Error List ---- */
+.dm-errors {
+  background: var(--color-danger-light);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+}
+
+.dm-errors-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-danger-text);
+  margin-bottom: 6px;
+}
+
+.dm-error-item {
+  font-size: 11px;
+  color: var(--color-danger-text);
+  line-height: 1.5;
+}
+
+/* ---- Status Icons ---- */
+.dm-status-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dm-status-icon--success {
+  color: var(--color-success-text);
+}
+
+.dm-status-icon--error {
+  color: var(--color-danger-text);
+}
+
+/* ---- Reset Confirm Panel ---- */
+.dm-reset-confirm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dm-reset-warning-box {
+  background: var(--color-danger-light);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.dm-reset-warning-text {
+  flex: 1;
+  font-size: 12px;
+  color: var(--color-danger-text);
+  line-height: 1.5;
+}
+
+.dm-confirm-input-label {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin-bottom: 4px;
+}
+
+/* ---- Spinner ---- */
+.dm-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(44, 103, 197, 0.2);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: dm-spin 600ms linear infinite;
+}
+
+@keyframes dm-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---- Toast notification ---- */
+.dm-toast {
+  position: fixed;
+  bottom: calc(var(--bottom-nav-height) + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-text-primary);
+  color: var(--color-text-inverse);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-floating);
+  z-index: 2000;
+  white-space: nowrap;
+  animation: dm-toast-in 240ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.dm-toast--success {
+  background: var(--color-success-text);
+}
+
+.dm-toast--error {
+  background: var(--color-danger-text);
+}
+
+.dm-toast--warning {
+  background: var(--color-warning-text);
+}
+
+@keyframes dm-toast-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* ---- File name chip ---- */
+.dm-file-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--color-primary-subtle);
+  border: 1px solid var(--color-primary-light);
+  border-radius: var(--radius-md);
+}
+
+.dm-file-chip-name {
+  flex: 1;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-primary-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dm-file-chip-remove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.dm-file-chip-remove:hover {
+  color: var(--color-danger);
+}

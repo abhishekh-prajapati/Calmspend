@@ -1,0 +1,60 @@
+.report-period-selector {
+  margin-bottom: 20px;
+  background: var(--color-surface, #FFFFFF);
+  border: 1px solid var(--color-border, #E2E8F0);
+  box-shadow: var(--shadow-sm);
+}
+
+.period-selector-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.period-nav-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.period-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: var(--color-surface-secondary, #F1F5F9);
+  border-radius: var(--radius-md, 8px);
+}
+
+.period-calendar-icon {
+  color: var(--color-primary);
+}
+
+.period-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-primary, #0F172A);
+}
+
+.period-active-pill {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-success-text, #047857);
+  background: var(--color-success-light, #ECFDF5);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 2px 6px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.reset-period-btn {
+  color: var(--color-text-secondary, #475569);
+  font-size: 13px;
+}
+
+.reset-period-btn:hover {
+  color: var(--color-primary);
+}

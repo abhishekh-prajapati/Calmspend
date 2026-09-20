@@ -1,0 +1,124 @@
+.need-want-card {
+  margin-bottom: 24px;
+}
+
+.empty-needwant-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 16px;
+  background: var(--color-surface-secondary, #F8FAFC);
+  border-radius: var(--radius-md, 8px);
+  border: 1px dashed var(--color-border, #CBD5E1);
+  text-align: center;
+}
+
+.empty-needwant-icon {
+  color: var(--color-text-muted, #94A3B8);
+  margin-bottom: 10px;
+}
+
+.empty-needwant-text {
+  font-size: 14px;
+  color: var(--color-text-secondary, #475569);
+}
+
+.needwant-bar-wrapper {
+  margin-bottom: 20px;
+}
+
+.needwant-bar-track {
+  display: flex;
+  height: 14px;
+  width: 100%;
+  border-radius: 7px;
+  overflow: hidden;
+  background: var(--color-surface-secondary, #F1F5F9);
+}
+
+.bar-segment {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.segment-needs {
+  background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+}
+
+.segment-wants {
+  background: linear-gradient(90deg, #3B82F6 0%, var(--color-primary) 100%);
+}
+
+.segment-unclassified {
+  background: linear-gradient(90deg, #64748b 0%, #475569 100%);
+}
+
+.needwant-stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.needwant-stat-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px;
+  background: var(--color-surface-secondary, #F8FAFC);
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid var(--color-border, #E2E8F0);
+}
+
+.stat-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.indicator-needs {
+  background: #10b981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+}
+
+.indicator-wants {
+  background: var(--color-primary);
+  box-shadow: 0 0 8px rgba(44, 103, 197, 0.5);
+}
+
+.indicator-unclassified {
+  background: #64748b;
+}
+
+.stat-text-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.nw-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-secondary, #475569);
+}
+
+.nw-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-primary, #0F172A);
+  margin-top: 2px;
+}
+
+.nw-pct {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-muted, #94A3B8);
+  margin-top: 2px;
+}
+
+.needwant-footer-note {
+  font-size: 11px;
+  color: var(--color-text-muted, #94A3B8);
+  line-height: 1.4;
+}

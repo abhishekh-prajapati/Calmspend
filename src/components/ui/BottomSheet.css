@@ -1,0 +1,91 @@
+.ui-bottom-sheet-root {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-sheet-backdrop);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.ui-bottom-sheet__backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(4px);
+  animation: ui-fade-in var(--transition-base) forwards;
+}
+
+.ui-bottom-sheet__panel {
+  position: relative;
+  z-index: var(--z-sheet);
+  width: 100%;
+  max-width: var(--app-max-width);
+  background-color: var(--color-surface);
+  border-top-left-radius: var(--radius-2xl);
+  border-top-right-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-floating);
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: calc(var(--spacing-4) + var(--safe-area-bottom));
+  animation: ui-slide-up var(--transition-smooth) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.ui-bottom-sheet__handle-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: var(--spacing-3);
+  padding-bottom: var(--spacing-2);
+  cursor: pointer;
+}
+
+.ui-bottom-sheet__handle {
+  width: 40px;
+  height: 4px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-surface-tertiary);
+}
+
+.ui-bottom-sheet__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-2) var(--page-padding) var(--spacing-3);
+  border-bottom: 1px solid var(--color-divider);
+}
+
+.ui-bottom-sheet__header-texts {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ui-bottom-sheet__title {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: 1.25;
+}
+
+.ui-bottom-sheet__subtitle {
+  font-size: var(--font-size-caption);
+  color: var(--color-text-secondary);
+  line-height: 1.3;
+}
+
+.ui-bottom-sheet__content {
+  padding: var(--spacing-4) var(--page-padding);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@keyframes ui-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes ui-slide-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}

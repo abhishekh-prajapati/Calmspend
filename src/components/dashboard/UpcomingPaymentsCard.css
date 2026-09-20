@@ -1,0 +1,157 @@
+.upcoming-payments-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.upcoming-payments-card {
+  border: 1px solid var(--color-border);
+}
+
+.upcoming-payments-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--spacing-4) var(--spacing-2);
+}
+
+.upcoming-payments-empty__icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-surface-secondary);
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--spacing-2);
+}
+
+.upcoming-payments-empty__title {
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-1);
+}
+
+.upcoming-payments-empty__desc {
+  color: var(--color-text-secondary);
+  max-width: 280px;
+  line-height: var(--line-height-body-sm);
+}
+
+.upcoming-payments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.upcoming-payment-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-subtle);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.upcoming-payment-row:hover {
+  background: var(--color-surface-hover, rgba(255, 255, 255, 0.05));
+  border-color: var(--color-border-hover, rgba(255, 255, 255, 0.2));
+}
+
+.upcoming-payment-row--overdue {
+  border-color: rgba(239, 68, 68, 0.4);
+  background: rgba(239, 68, 68, 0.04);
+}
+
+.upcoming-payment-row__left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.upcoming-payment-row__icon-wrap {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--color-primary);
+}
+
+.upcoming-payment-row__icon-wrap--subscription {
+  background: rgba(139, 92, 246, 0.1);
+  color: #8b5cf6;
+}
+
+.upcoming-payment-row__icon-wrap--bill {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--color-warning);
+}
+
+.upcoming-payment-row__icon-wrap--rent {
+  background: rgba(236, 72, 153, 0.1);
+  color: #ec4899;
+}
+
+.upcoming-payment-row__icon-wrap--loan_emi {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--color-danger);
+}
+
+.upcoming-payment-row__icon-wrap--salary {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--color-success);
+}
+
+.upcoming-payment-row__info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.upcoming-payment-row__name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.upcoming-payment-row__meta {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin-top: 2px;
+}
+
+.upcoming-payment-row__overdue-text {
+  color: var(--color-danger);
+  font-weight: 500;
+}
+
+.upcoming-payment-row__due-today-text {
+  color: var(--color-warning);
+  font-weight: 500;
+}
+
+.upcoming-payment-row__right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.upcoming-payment-row__amount {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}

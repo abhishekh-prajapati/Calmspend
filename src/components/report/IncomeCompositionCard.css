@@ -1,0 +1,76 @@
+.income-composition-card {
+  margin-bottom: 24px;
+}
+
+.empty-income-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: var(--radius-md, 8px);
+  border: 1px dashed rgba(255, 255, 255, 0.08);
+  text-align: center;
+}
+
+.empty-income-icon {
+  color: #64748b;
+  margin-bottom: 10px;
+}
+
+.empty-income-text {
+  font-size: 14px;
+  color: var(--color-text-secondary, #94a3b8);
+}
+
+.income-breakdown-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.income-breakdown-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.income-cat-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.income-cat-name {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary, #f8fafc);
+}
+
+.income-cat-count {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.income-cat-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.income-cat-amount {
+  font-size: 14px;
+  font-weight: 700;
+  color: #10b981;
+}
+
+.income-cat-share {
+  font-size: 11px;
+  color: var(--color-text-secondary, #94a3b8);
+  margin-top: 2px;
+}

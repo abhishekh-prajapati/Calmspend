@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">PBP Personal Finance</string>
+    <string name="title_activity_main">PBP Personal Finance</string>
+    <string name="package_name">com.pbp.personalfinance</string>
+    <string name="custom_url_scheme">com.pbp.personalfinance</string>
+</resources>

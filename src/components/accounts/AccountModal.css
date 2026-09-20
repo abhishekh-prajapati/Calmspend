@@ -1,0 +1,49 @@
+.account-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.account-modal-type-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.account-modal-type-options {
+  display: flex;
+  gap: var(--spacing-2);
+}
+
+.account-type-btn {
+  flex: 1;
+  padding: var(--spacing-2) var(--spacing-3);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: center;
+}
+
+.account-type-btn:hover {
+  border-color: var(--color-primary-light);
+  background-color: var(--color-surface-secondary);
+}
+
+.account-type-btn--active {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary-subtle);
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.account-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-2);
+  margin-top: var(--spacing-2);
+}

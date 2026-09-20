@@ -1,0 +1,113 @@
+.ui-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-btn);
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  transition: all var(--transition-fast);
+  user-select: none;
+  white-space: nowrap;
+  touch-action: manipulation;
+}
+
+.ui-button--full-width {
+  width: 100%;
+}
+
+/* Sizing */
+.ui-button--sm {
+  height: 36px;
+  padding: 0 var(--spacing-3);
+  font-size: var(--font-size-body-sm);
+}
+
+.ui-button--md {
+  height: 44px;
+  padding: 0 var(--spacing-5);
+  font-size: var(--font-size-btn);
+}
+
+.ui-button--lg {
+  height: 52px;
+  padding: 0 var(--spacing-6);
+  font-size: var(--font-size-body);
+}
+
+/* Variants */
+.ui-button--primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  box-shadow: 0 4px 12px rgba(44, 103, 197, 0.25);
+}
+
+.ui-button--primary:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+  box-shadow: 0 6px 16px rgba(44, 103, 197, 0.35);
+  transform: translateY(-1px);
+}
+
+.ui-button--primary:active:not(:disabled) {
+  background-color: var(--color-primary-active);
+  transform: translateY(0);
+}
+
+.ui-button--secondary {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-text);
+}
+
+.ui-button--secondary:hover:not(:disabled) {
+  background-color: #D2E3FC;
+}
+
+.ui-button--secondary:active:not(:disabled) {
+  background-color: #BED6F6;
+}
+
+.ui-button--outline {
+  background-color: transparent;
+  border-color: var(--color-border);
+  color: var(--color-text-primary);
+}
+
+.ui-button--outline:hover:not(:disabled) {
+  background-color: var(--color-surface-secondary);
+  border-color: var(--color-text-muted);
+}
+
+.ui-button--ghost {
+  background-color: transparent;
+  color: var(--color-text-secondary);
+}
+
+.ui-button--ghost:hover:not(:disabled) {
+  background-color: var(--color-surface-secondary);
+  color: var(--color-text-primary);
+}
+
+.ui-button--danger {
+  background-color: var(--color-danger);
+  color: var(--color-text-inverse);
+}
+
+.ui-button--danger:hover:not(:disabled) {
+  background-color: #DC2626;
+}
+
+/* Disabled */
+.ui-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.ui-button__icon-left,
+.ui-button__icon-right {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

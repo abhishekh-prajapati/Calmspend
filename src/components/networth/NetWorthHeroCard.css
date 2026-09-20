@@ -1,0 +1,172 @@
+.net-worth-hero-card {
+  background: var(--color-surface, #FFFFFF);
+  border: 1px solid var(--color-border, #E2E8F0);
+  border-radius: var(--radius-lg, 16px);
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.net-worth-hero-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.net-worth-hero-card__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  background: var(--color-primary-light, #EBF2FC);
+  color: var(--color-primary, #2C67C5);
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.net-worth-hero-card__snapshot-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  background: var(--color-surface-secondary, #F1F5F9);
+  color: var(--color-text-primary, #0F172A);
+  border: 1px solid var(--color-border, #E2E8F0);
+  border-radius: var(--radius-md, 8px);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.net-worth-hero-card__snapshot-btn:hover {
+  background: var(--color-surface-tertiary, #E5E7EB);
+}
+
+.net-worth-hero-card__value-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.net-worth-hero-card__amount {
+  font-size: 2.25rem;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.net-worth-hero-card__amount--positive {
+  color: var(--color-text-primary, #0F172A);
+}
+
+.net-worth-hero-card__amount--negative {
+  color: var(--color-danger, #EF4444);
+}
+
+.net-worth-hero-card__subtitle {
+  font-size: 0.82rem;
+  color: var(--color-text-secondary, #475569);
+  margin: 0;
+}
+
+.net-worth-hero-card__metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.net-worth-hero-card__metric {
+  background: var(--color-surface-secondary, #F8FAFC);
+  border: 1px solid var(--color-border-subtle, #E2E8F0);
+  border-radius: var(--radius-md, 10px);
+  padding: 0.65rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.net-worth-hero-card__metric-label {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-text-secondary, #475569);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.net-worth-hero-card__metric--assets .net-worth-hero-card__metric-label {
+  color: var(--color-success-text, #047857);
+}
+
+.net-worth-hero-card__metric--liabilities .net-worth-hero-card__metric-label {
+  color: var(--color-danger-text, #B91C1C);
+}
+
+.net-worth-hero-card__metric-value {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-text-primary, #0F172A);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.net-worth-hero-card__actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.net-worth-hero-card__action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.6rem 0.85rem;
+  border-radius: var(--radius-md, 10px);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.net-worth-hero-card__action-btn--asset {
+  background: var(--color-success-light, #ECFDF5);
+  color: var(--color-success-text, #047857);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.net-worth-hero-card__action-btn--asset:hover {
+  background: #D1FAE5;
+}
+
+.net-worth-hero-card__action-btn--liability {
+  background: var(--color-danger-light, #FEF2F2);
+  color: var(--color-danger-text, #B91C1C);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.net-worth-hero-card__action-btn--liability:hover {
+  background: #FEE2E2;
+}
+
+@media (max-width: 480px) {
+  .net-worth-hero-card__metrics-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .net-worth-hero-card__metric--ratio {
+    grid-column: span 2;
+  }
+}

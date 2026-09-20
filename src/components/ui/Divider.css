@@ -1,0 +1,21 @@
+.ui-divider {
+  border: none;
+  border-top: 1px solid var(--color-divider);
+  width: 100%;
+}
+
+.ui-divider--spacing-none {
+  margin: 0;
+}
+
+.ui-divider--spacing-sm {
+  margin: var(--spacing-2) 0;
+}
+
+.ui-divider--spacing-md {
+  margin: var(--spacing-4) 0;
+}
+
+.ui-divider--spacing-lg {
+  margin: var(--spacing-6) 0;
+}
