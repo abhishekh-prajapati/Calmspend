@@ -3,12 +3,14 @@ import { useFinancial } from '../context/useFinancial';
 import { formatCurrency } from '../services/currency';
 import { toMajorUnits, toMinorUnits } from '../utils/money';
 import { getAdjacentPeriod } from '../services/periodService';
+import { getMonthlyExpensesMinor } from '../services/financialCalculations';
 import { CategoryIcon } from '../components/ui/CategoryIcon';
 import './PlanPage.css';
 
 export const PlanPage: React.FC = () => {
   const {
     categories,
+    transactions,
     selectedPlanPeriod,
     setSelectedPlanPeriod,
     getPlanSummaryForPeriod,
@@ -58,19 +60,39 @@ export const PlanPage: React.FC = () => {
 
   // Live Plan Summary for the actively selected month
   const planSummary = getPlanSummaryForPeriod(selectedPlanPeriod);
-  const totalBudgeted = toMajorUnits(planSummary.totalPlannedExpensesMinor);
-  const categoryProgress = planSummary.categoryProgress || [];
-  const totalSpent = categoryProgress.reduce(
-    (sum, p) => sum + toMajorUnits(p.actualAmountMinor),
-    0
-  );
-  const totalAvailable = Math.max(0, totalBudgeted - totalSpent);
+  
+  // Total budget pool is either the explicit envelopes sum, or the target income minus planned savings
+  const totalEnvelopesBudgetMinor = planSummary.totalPlannedExpensesMinor;
+  const targetIncomeMinor = planSummary.totalPlannedIncomeMinor;
+  const plannedSavingsMinor = planSummary.plannedSavingsMinor;
+  
+  const effectiveTotalBudgetMinor =
+    totalEnvelopesBudgetMinor > 0
+      ? totalEnvelopesBudgetMinor
+      : Math.max(0, targetIncomeMinor - plannedSavingsMinor);
+
+  const totalBudgeted = toMajorUnits(effectiveTotalBudgetMinor);
+
+  // Total expenses incurred this month across all categories
+  const actualMonthExpensesMinor = getMonthlyExpensesMinor(transactions, selectedPlanPeriod);
+  const totalSpent = toMajorUnits(actualMonthExpensesMinor);
+
+  // Remaining money available to spend
+  const totalAvailable = effectiveTotalBudgetMinor > 0
+    ? Math.max(0, totalBudgeted - totalSpent)
+    : 0;
 
   const budgetProgressPercent =
     totalBudgeted > 0 ? Math.min(100, Math.round((totalSpent / totalBudgeted) * 100)) : 0;
 
+  const categoryProgress = planSummary.categoryProgress || [];
+  // Filter active envelopes: categories with a plan OR with actual spending this month
+  const activeEnvelopes = categoryProgress.filter(
+    (p) => p.plannedAmountMinor > 0 || p.actualAmountMinor > 0
+  );
+
   // Unbudgeted expense categories
-  const existingCategoryIds = new Set(categoryProgress.map((p) => p.categoryId));
+  const existingCategoryIds = new Set(categoryProgress.filter((p) => p.plannedAmountMinor > 0).map((p) => p.categoryId));
   const availableExpenseCats = categories.filter((c) => c.type === 'expense');
 
   const handleClonePreviousMonth = async () => {
@@ -82,6 +104,7 @@ export const PlanPage: React.FC = () => {
       showToast('Envelopes synced for this month 🌱');
     }
   };
+
 
   const handleSaveTargets = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -345,7 +368,7 @@ export const PlanPage: React.FC = () => {
       <div className="calm-section-row">
         <div className="calm-section-row__left">
           <span className="calm-section-row__title">Budget Envelopes</span>
-          <span className="calm-section-row__count">{categoryProgress.length}</span>
+          <span className="calm-section-row__count">{activeEnvelopes.length}</span>
         </div>
         <button
           type="button"
@@ -362,14 +385,14 @@ export const PlanPage: React.FC = () => {
 
       {/* 5. Envelope Cards List */}
       <div className="calm-envelopes-list">
-        {categoryProgress.length > 0 ? (
-          categoryProgress.map((prog) => {
+        {activeEnvelopes.length > 0 ? (
+          activeEnvelopes.map((prog) => {
             const catObj = getCategory(prog.categoryId);
             const spent = toMajorUnits(prog.actualAmountMinor);
             const planned = toMajorUnits(prog.plannedAmountMinor);
             const remaining = Math.max(0, planned - spent);
-            const percent = planned > 0 ? Math.min(100, Math.round((spent / planned) * 100)) : 0;
-            const pace = getPaceStatus(percent);
+            const percent = planned > 0 ? Math.min(100, Math.round((spent / planned) * 100)) : (spent > 0 ? 100 : 0);
+            const pace = planned > 0 ? getPaceStatus(percent) : { label: 'Unbudgeted spending', badgeClass: 'calm-envelope-badge--caution', icon: 'info' };
 
             return (
               <div
@@ -399,15 +422,22 @@ export const PlanPage: React.FC = () => {
                     <div className="calm-envelope-card__info">
                       <span className="calm-envelope-card__name">{prog.categoryName}</span>
                       <span className="calm-envelope-card__sub">
-                        {formatCurrency(spent)} spent of {formatCurrency(planned)}
+                        {planned > 0
+                          ? `${formatCurrency(spent)} spent of ${formatCurrency(planned)}`
+                          : `${formatCurrency(spent)} spent (No budget assigned)`}
                       </span>
                     </div>
                   </div>
                   <div className="calm-envelope-card__right">
-                    <span className="calm-envelope-card__remaining">{formatCurrency(remaining)}</span>
-                    <span className="calm-envelope-card__left-label">left</span>
+                    <span className="calm-envelope-card__remaining">
+                      {planned > 0 ? formatCurrency(remaining) : formatCurrency(spent)}
+                    </span>
+                    <span className="calm-envelope-card__left-label">
+                      {planned > 0 ? 'left' : 'spent'}
+                    </span>
                   </div>
                 </div>
+
 
                 {/* Progress Track */}
                 <div className="calm-envelope-track">

@@ -155,12 +155,13 @@ export class MonthlyBudgetRepository {
   deleteBudgetItem(id: string): boolean {
     const data = this.adapter.loadData(DEFAULT_SYSTEM_CATEGORIES);
     const initialLen = data.budgetItems.length;
-    data.budgetItems = data.budgetItems.filter((b) => b.id !== id);
+    data.budgetItems = data.budgetItems.filter((b) => b.id !== id && b.categoryId !== id);
 
     if (data.budgetItems.length === initialLen) return false;
     this.adapter.saveData(data);
     return true;
   }
+
 
   savePlannedIncomeItem(
     periodKey: string,
