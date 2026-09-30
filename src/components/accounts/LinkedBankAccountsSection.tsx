@@ -8,7 +8,7 @@ import { ConnectBankModal } from './ConnectBankModal';
 import './LinkedBankAccountsSection.css';
 
 export const LinkedBankAccountsSection: React.FC = () => {
-  const { accounts, categories, refreshData } = useFinancial();
+  const { accounts, categories, refreshData, disconnectLinkedBank } = useFinancial();
   const [isConnectModalOpen, setIsConnectModalOpen] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
   const [syncFeedback, setSyncFeedback] = useState<string | null>(null);
@@ -40,6 +40,18 @@ export const LinkedBankAccountsSection: React.FC = () => {
       setSyncFeedback(`Error: ${msg}`);
     } finally {
       setIsSyncing(false);
+    }
+  };
+
+  const handleDisconnect = async (accountId: string, accountName: string) => {
+    if (window.confirm(`Disconnect "${accountName}" and remove its imported bank transactions?`)) {
+      try {
+        await disconnectLinkedBank(accountId);
+        setSyncFeedback(`Disconnected "${accountName}" and removed associated bank transactions.`);
+      } catch (err: unknown) {
+        const msg = err instanceof Error ? err.message : 'Disconnect failed';
+        setSyncFeedback(`Error: ${msg}`);
+      }
     }
   };
 
@@ -92,18 +104,31 @@ export const LinkedBankAccountsSection: React.FC = () => {
 
                 <div className="calm-linked-bank-card__right">
                   <span className="calm-linked-bank-balance">{formatCurrency(balance)}</span>
-                  <button
-                    type="button"
-                    className="calm-sync-now-btn"
-                    onClick={() => acc.bankConnectionId && handleManualSync(acc.bankConnectionId, acc.fipName)}
-                    disabled={isSyncing}
-                    title="Fetch latest bank statement"
-                  >
-                    <span className={`material-symbols-outlined ${isSyncing ? 'calm-spin' : ''}`}>
-                      sync
-                    </span>
-                    <span>{isSyncing ? 'Syncing...' : 'Sync'}</span>
-                  </button>
+                  <div style={{ display: 'flex', gap: 6 }}>
+                    <button
+                      type="button"
+                      className="calm-sync-now-btn"
+                      onClick={() => acc.bankConnectionId && handleManualSync(acc.bankConnectionId, acc.fipName)}
+                      disabled={isSyncing}
+                      title="Fetch latest bank statement"
+                    >
+                      <span className={`material-symbols-outlined ${isSyncing ? 'calm-spin' : ''}`}>
+                        sync
+                      </span>
+                      <span>{isSyncing ? 'Syncing...' : 'Sync'}</span>
+                    </button>
+                    <button
+                      type="button"
+                      className="calm-sync-now-btn"
+                      style={{ color: 'var(--color-terracotta)', borderColor: 'var(--color-terracotta)' }}
+                      onClick={() => handleDisconnect(acc.id, acc.name)}
+                      disabled={isSyncing}
+                      title="Disconnect bank account"
+                    >
+                      <span className="material-symbols-outlined">link_off</span>
+                      <span>Disconnect</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             );

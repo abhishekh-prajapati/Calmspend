@@ -246,6 +246,25 @@
   background-color: var(--color-tertiary);
 }
 
+.calm-account-chip__remove-btn {
+  background: none;
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-pill);
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+  margin-left: 4px;
+}
+
+.calm-account-chip__remove-btn:hover {
+  color: var(--color-terracotta, #ef4444);
+  background-color: var(--color-surface-container-high);
+}
+
 /* 3. Quick Actions */
 .calm-quick-actions {
   display: grid;

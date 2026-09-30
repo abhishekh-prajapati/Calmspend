@@ -520,3 +520,113 @@
   font-size: 16px;
   color: var(--color-secondary);
 }
+
+/* Budget validation warning banner */
+.calm-budget-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 10px 12px;
+  background-color: var(--color-terracotta-container, #fee2e2);
+  border: 1px solid var(--color-terracotta, #ef4444);
+  border-radius: var(--radius-lg);
+  color: var(--color-terracotta, #b91c1c);
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 500;
+  animation: fadeIn 150ms ease;
+}
+
+.calm-budget-warning span.material-symbols-outlined {
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Modern Input Box */
+.calm-input-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--color-surface-container-lowest);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 8px 14px;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.calm-input-box:focus-within {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(32, 107, 72, 0.12);
+}
+
+.calm-input-currency {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+}
+
+.calm-input-field {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  outline: none;
+  font-family: inherit;
+}
+
+.calm-input-field::-webkit-outer-spin-button,
+.calm-input-field::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.calm-input-field[type=number] {
+  -moz-appearance: textfield;
+}
+
+.calm-input-field::placeholder {
+  color: rgba(64, 73, 67, 0.35);
+  font-weight: 400;
+}
+
+/* Micro button active selection */
+.calm-micro-btn--active {
+  background-color: var(--color-primary-container) !important;
+  color: var(--color-primary-dark) !important;
+  border-color: var(--color-primary) !important;
+  font-weight: 700 !important;
+}
+
+/* Wishlist extra income badge */
+.calm-wishlist-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-secondary-container);
+  color: var(--color-secondary-dark, #065f46);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.calm-wishlist-badge span.material-symbols-outlined {
+  font-size: 14px;
+}
+
+/* Toast error state */
+.calm-trends-toast--error {
+  background-color: #7f1d1d !important;
+  color: #fef2f2 !important;
+}
+
+.calm-trends-toast--error span.material-symbols-outlined {
+  color: #fca5a5 !important;
+}
+
+
+

@@ -40,12 +40,14 @@ export interface FinancialContextType {
   deleteTransaction: (id: string) => Promise<boolean>;
   addAccount: (data: Omit<Account, 'id' | 'createdAt' | 'updatedAt'>) => Promise<Account>;
   getAccount: (id: string) => Account | undefined;
+  disconnectLinkedBank: (accountId: string) => Promise<void>;
   getCategory: (id: string) => Category | undefined;
-  saveBudgetItem: (periodKey: string, categoryId: string, plannedAmountMinor: number) => Promise<void>;
+  saveBudgetItem: (periodKey: string, categoryId: string, plannedAmountMinor: number, priority?: 'need' | 'want') => Promise<void>;
   deleteBudgetItem: (id: string) => Promise<void>;
   savePlannedIncome: (periodKey: string, name: string, plannedAmountMinor: number, categoryId?: string, id?: string, accountId?: string) => Promise<void>;
   deletePlannedIncome: (id: string) => Promise<void>;
   setPlannedSavings: (periodKey: string, plannedSavingsMinor: number) => Promise<void>;
+  setEmergencyCushion: (periodKey: string, emergencyCushionMinor: number) => Promise<void>;
   setCustomDailyAllowance: (periodKey: string, customDailyAllowanceMinor: number | null) => Promise<void>;
   copyPreviousMonthPlan: (targetPeriodKey: string, sourcePeriodKey?: string) => Promise<boolean>;
   deleteMonthlyPlan: (periodKey: string) => Promise<boolean>;

@@ -113,10 +113,36 @@ export class MonthlyBudgetRepository {
     return budget;
   }
 
+  setEmergencyCushion(periodKey: string, emergencyCushionMinor: number): MonthlyBudget {
+    const data = this.adapter.loadData(DEFAULT_SYSTEM_CATEGORIES);
+    let budget = data.monthlyBudgets.find((b) => b.periodKey === periodKey);
+    const now = new Date().toISOString();
+    const cleanAmount = Math.max(0, Math.round(emergencyCushionMinor));
+
+    if (!budget) {
+      budget = {
+        id: `mb_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`,
+        periodKey,
+        plannedSavingsMinor: 0,
+        emergencyCushionMinor: cleanAmount,
+        createdAt: now,
+        updatedAt: now,
+      };
+      data.monthlyBudgets.push(budget);
+    } else {
+      budget.emergencyCushionMinor = cleanAmount;
+      budget.updatedAt = now;
+    }
+
+    this.adapter.saveData(data);
+    return budget;
+  }
+
   saveBudgetItem(
     periodKey: string,
     categoryId: string,
     plannedAmountMinor: number,
+    priority: 'need' | 'want' = 'need',
   ): BudgetItem {
     const budget = this.ensureMonthlyBudget(periodKey);
     const data = this.adapter.loadData(DEFAULT_SYSTEM_CATEGORIES);
@@ -133,6 +159,7 @@ export class MonthlyBudgetRepository {
       savedItem = {
         ...data.budgetItems[existingIndex],
         plannedAmountMinor: cleanAmount,
+        priority,
         updatedAt: now,
       };
       data.budgetItems[existingIndex] = savedItem;
@@ -142,6 +169,7 @@ export class MonthlyBudgetRepository {
         monthlyBudgetId: budget.id,
         categoryId,
         plannedAmountMinor: cleanAmount,
+        priority,
         createdAt: now,
         updatedAt: now,
       };

@@ -342,6 +342,7 @@ export function getCategoryBudgetProgressList(
       categoryName: category.name,
       categoryIcon: category.icon || 'Tag',
       categoryColor: category.color || '#3b82f6',
+      priority: budgetItem?.priority || 'need',
       plannedAmountMinor,
       actualAmountMinor,
       remainingAmountMinor,
@@ -379,7 +380,8 @@ export function getMonthlyPlanSummary(
   const totalPlannedIncomeMinor = plannedIncomeItems.reduce((acc, item) => acc + item.plannedAmountMinor, 0);
   const totalPlannedExpensesMinor = budgetItems.reduce((acc, item) => acc + item.plannedAmountMinor, 0);
   const plannedSavingsMinor = budget ? budget.plannedSavingsMinor : 0;
-  const unallocatedMinor = totalPlannedIncomeMinor - totalPlannedExpensesMinor - plannedSavingsMinor;
+  const emergencyCushionMinor = budget?.emergencyCushionMinor || 0;
+  const unallocatedMinor = totalPlannedIncomeMinor - totalPlannedExpensesMinor - plannedSavingsMinor - emergencyCushionMinor;
 
   const status = derivePlanStatus(
     totalPlannedIncomeMinor,
@@ -413,6 +415,7 @@ export function getMonthlyPlanSummary(
     totalPlannedIncomeMinor,
     totalPlannedExpensesMinor,
     plannedSavingsMinor,
+    emergencyCushionMinor,
     unallocatedMinor,
     status,
     categoryProgress,

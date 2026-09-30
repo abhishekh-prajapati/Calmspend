@@ -6,6 +6,7 @@ export interface MonthlyBudget {
   id: string;
   periodKey: string; // YYYY-MM
   plannedSavingsMinor: number; // Integer minor units (paise)
+  emergencyCushionMinor?: number; // Unexpected expenses buffer in minor units (paise)
   customDailyAllowanceMinor?: number | null; // Optional user-defined daily spending limit
   createdAt: string; // ISO
   updatedAt: string; // ISO
@@ -16,6 +17,7 @@ export interface BudgetItem {
   monthlyBudgetId: string;
   categoryId: string; // Strictly active expense categories
   plannedAmountMinor: number; // Integer minor units (paise)
+  priority?: 'need' | 'want'; // User-selected priority
   createdAt: string;
   updatedAt: string;
 }
@@ -36,6 +38,7 @@ export interface CategoryBudgetProgress {
   categoryName: string;
   categoryIcon: string;
   categoryColor: string;
+  priority?: 'need' | 'want';
   plannedAmountMinor: number;
   actualAmountMinor: number;
   remainingAmountMinor: number;
@@ -52,6 +55,7 @@ export interface MonthlyPlanSummary {
   totalPlannedIncomeMinor: number;
   totalPlannedExpensesMinor: number;
   plannedSavingsMinor: number;
+  emergencyCushionMinor?: number;
   unallocatedMinor: number;
   status: PlanStatus;
   categoryProgress: CategoryBudgetProgress[];

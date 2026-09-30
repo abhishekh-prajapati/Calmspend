@@ -2,6 +2,8 @@ import type { NormalizedDepositAccount } from '../../types/accountAggregator';
 import type { Account, Category, Transaction } from '../../types/transaction';
 import { accountRepository } from '../repositories/accountRepository';
 import { transactionRepository } from '../repositories/transactionRepository';
+import { defaultStorageAdapter } from '../storage/storageAdapter';
+import { DEFAULT_SYSTEM_CATEGORIES } from '../storage/categoryRegistry';
 
 export interface SyncResult {
   importedCount: number;
@@ -157,6 +159,19 @@ export class AaSyncManager {
       createdAccounts,
       updatedAccounts,
     };
+  }
+
+  /**
+   * Disconnects a linked bank account and removes its imported transactions
+   */
+  async disconnectLinkedAccount(accountId: string): Promise<void> {
+    accountRepository.delete(accountId);
+
+    const data = defaultStorageAdapter.loadData(DEFAULT_SYSTEM_CATEGORIES);
+    data.transactions = data.transactions.filter(
+      (t) => t.accountId !== accountId && t.sourceProvider !== 'setu_aa'
+    );
+    defaultStorageAdapter.saveData(data);
   }
 }
 

@@ -22,6 +22,7 @@ import { manualAssetRepository } from '../services/repositories/manualAssetRepos
 import { manualLiabilityRepository } from '../services/repositories/manualLiabilityRepository';
 import { financialSnapshotRepository } from '../services/repositories/financialSnapshotRepository';
 import { localStorageAdapter } from '../services/storage/localStorageAdapter';
+import { aaSyncManager } from '../services/aa/aaSyncManager';
 import type { StorageHealthInfo } from '../services/storage/storageHealth';
 import { getPeriodInfo } from '../services/periodService';
 import {
@@ -123,6 +124,14 @@ export const FinancialProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     [accounts],
   );
 
+  const disconnectLinkedBank = useCallback(
+    async (accountId: string): Promise<void> => {
+      await aaSyncManager.disconnectLinkedAccount(accountId);
+      refreshData();
+    },
+    [refreshData],
+  );
+
   const getCategory = useCallback(
     (id: string): Category | undefined => {
       return categories.find((c) => c.id === id);
@@ -132,8 +141,8 @@ export const FinancialProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
   // Planning action handlers
   const saveBudgetItem = useCallback(
-    async (periodKey: string, categoryId: string, plannedAmountMinor: number): Promise<void> => {
-      monthlyBudgetRepository.saveBudgetItem(periodKey, categoryId, plannedAmountMinor);
+    async (periodKey: string, categoryId: string, plannedAmountMinor: number, priority: 'need' | 'want' = 'need'): Promise<void> => {
+      monthlyBudgetRepository.saveBudgetItem(periodKey, categoryId, plannedAmountMinor, priority);
       refreshData();
     },
     [refreshData],
@@ -173,6 +182,14 @@ export const FinancialProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const setPlannedSavings = useCallback(
     async (periodKey: string, plannedSavingsMinor: number): Promise<void> => {
       monthlyBudgetRepository.setPlannedSavings(periodKey, plannedSavingsMinor);
+      refreshData();
+    },
+    [refreshData],
+  );
+
+  const setEmergencyCushion = useCallback(
+    async (periodKey: string, emergencyCushionMinor: number): Promise<void> => {
+      monthlyBudgetRepository.setEmergencyCushion(periodKey, emergencyCushionMinor);
       refreshData();
     },
     [refreshData],
@@ -715,12 +732,14 @@ export const FinancialProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       deleteTransaction,
       addAccount,
       getAccount,
+      disconnectLinkedBank,
       getCategory,
       saveBudgetItem,
       deleteBudgetItem,
       savePlannedIncome,
       deletePlannedIncome,
       setPlannedSavings,
+      setEmergencyCushion,
       setCustomDailyAllowance,
       copyPreviousMonthPlan,
       deleteMonthlyPlan,
@@ -788,12 +807,14 @@ export const FinancialProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       deleteTransaction,
       addAccount,
       getAccount,
+      disconnectLinkedBank,
       getCategory,
       saveBudgetItem,
       deleteBudgetItem,
       savePlannedIncome,
       deletePlannedIncome,
       setPlannedSavings,
+      setEmergencyCushion,
       copyPreviousMonthPlan,
       deleteMonthlyPlan,
       createGoal,

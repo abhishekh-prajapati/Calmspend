@@ -17,11 +17,19 @@ export const HomePage: React.FC = () => {
     upcomingOccurrences,
     recordOccurrencePayment,
     getCategory,
+    disconnectLinkedBank,
   } = useFinancial();
 
   const [isExplanationOpen, setIsExplanationOpen] = useState(false);
   const [isConnectBankOpen, setIsConnectBankOpen] = useState(false);
   const [paidBills, setPaidBills] = useState<Record<string, boolean>>({});
+
+  const handleDisconnectAccount = async (e: React.MouseEvent, accountId: string, accountName: string) => {
+    e.stopPropagation();
+    if (window.confirm(`Disconnect "${accountName}" and remove its balance & imported bank transactions?`)) {
+      await disconnectLinkedBank(accountId);
+    }
+  };
 
   // Calculations
   const safeToSpendMajor = toMajorUnits(summary.dailyAllowanceMinor || summary.availableToSpendMinor || 0);
@@ -152,6 +160,15 @@ export const HomePage: React.FC = () => {
                   <span className="calm-account-chip__label">
                     {acc.name}: <strong>{formatCurrency(toMajorUnits(accBalanceMinor))}</strong>
                   </span>
+                  <button
+                    type="button"
+                    className="calm-account-chip__remove-btn"
+                    onClick={(e) => handleDisconnectAccount(e, acc.id, acc.name)}
+                    title={`Remove / Disconnect ${acc.name}`}
+                    aria-label={`Remove ${acc.name}`}
+                  >
+                    <span className="material-symbols-outlined" style={{ fontSize: 16 }}>close</span>
+                  </button>
                 </div>
               );
             })
