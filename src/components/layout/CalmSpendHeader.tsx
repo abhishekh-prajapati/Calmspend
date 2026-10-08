@@ -1,5 +1,7 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useFinancial } from '../../context/useFinancial';
+import { NotificationBadge } from '../notifications/NotificationBadge';
 import './CalmSpendHeader.css';
 
 export interface CalmSpendHeaderProps {
@@ -11,47 +13,16 @@ export interface CalmSpendHeaderProps {
 export const CalmSpendHeader: React.FC<CalmSpendHeaderProps> = ({
   onNotificationClick,
   showBackButton = false,
-  titleOverride,
 }) => {
-  const location = useLocation();
   const navigate = useNavigate();
-
-  // Compute subtitle tag from current path
-  const getSubtitle = (): string => {
-    if (titleOverride) return titleOverride;
-    const path = location.pathname;
-    if (path.startsWith('/home')) return 'Daily';
-    if (path.startsWith('/plan')) return 'Budget';
-    if (path.startsWith('/net-worth')) return 'Goals';
-    if (path.startsWith('/report')) return 'Trends';
-    if (path.startsWith('/expenses') || path.startsWith('/income') || path.startsWith('/transfers')) return 'Log';
-    if (path.startsWith('/settings') || path.startsWith('/data-management')) return 'Settings';
-    return 'Finance';
-  };
-
-  const formattedToday = new Intl.DateTimeFormat('en-US', {
-    month: 'short',
-    day: 'numeric',
-  }).format(new Date());
-
-  const handleProfileClick = () => {
-    navigate('/settings');
-  };
-
-  const handleNotificationClick = () => {
-    if (onNotificationClick) {
-      onNotificationClick();
-    } else {
-      navigate('/report');
-    }
-  };
+  const { unreadNotificationCount } = useFinancial();
 
   return (
     <header className="calmspend-header">
       <div className="calmspend-header__container">
-        {/* Left: Brand or Back Button */}
+        {/* Left: Logo & AA Linked status */}
         <div className="calmspend-header__left">
-          {showBackButton ? (
+          {showBackButton && (
             <button
               type="button"
               className="calmspend-header__back-btn"
@@ -60,7 +31,7 @@ export const CalmSpendHeader: React.FC<CalmSpendHeaderProps> = ({
             >
               <span className="material-symbols-outlined">arrow_back</span>
             </button>
-          ) : null}
+          )}
 
           <div
             className="calmspend-header__brand"
@@ -71,34 +42,27 @@ export const CalmSpendHeader: React.FC<CalmSpendHeaderProps> = ({
             <div className="calmspend-header__logo-icon">
               <span className="material-symbols-outlined">spa</span>
             </div>
-            <div className="calmspend-header__titles">
-              <span className="calmspend-header__title">CalmSpend</span>
-              <span className="calmspend-header__subtitle">{getSubtitle()}</span>
-            </div>
+            <span className="calmspend-header__title">CalmSpend</span>
           </div>
         </div>
 
-        {/* Right: Date Pill, Notification & Profile */}
+        {/* Right: Notification & Profile */}
         <div className="calmspend-header__right">
-          <div className="calmspend-header__date-pill">
-            <span className="material-symbols-outlined calmspend-header__calendar-icon">calendar_today</span>
-            <span>Today, {formattedToday}</span>
-          </div>
-
           <button
             type="button"
             className="calmspend-header__icon-btn"
-            onClick={handleNotificationClick}
+            onClick={onNotificationClick}
             aria-label="Notifications"
           >
             <span className="material-symbols-outlined">notifications</span>
+            {unreadNotificationCount > 0 && <NotificationBadge count={unreadNotificationCount} />}
           </button>
 
           <button
             type="button"
             className="calmspend-header__avatar-btn"
-            onClick={handleProfileClick}
-            aria-label="Account Settings"
+            onClick={() => navigate('/profile')}
+            aria-label="User Profile"
           >
             <span className="material-symbols-outlined">person</span>
           </button>

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Background Radial & Linear Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#022c22" />
+    </linearGradient>
+    <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="50%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6ee7b7" />
+      <stop offset="100%" stop-color="#a7f3d0" />
+    </linearGradient>
+    <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0" />
+    </radialGradient>
+    <filter id="dropShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#059669" flood-opacity="0.4" />
+    </filter>
+  </defs>
+
+  <!-- App Icon Squircle Background -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)" />
+  <rect width="504" height="504" x="4" y="4" rx="108" fill="none" stroke="#10b981" stroke-opacity="0.25" stroke-width="4" />
+
+  <!-- Ambient Emerald Glow -->
+  <circle cx="256" cy="256" r="190" fill="url(#glowGrad)" />
+
+  <!-- Circular Orbit Ring representing Balance & Pacing -->
+  <circle cx="256" cy="256" r="140" fill="none" stroke="#10b981" stroke-opacity="0.2" stroke-width="6" stroke-dasharray="16 10" />
+
+  <!-- Main CalmSpend Zen Leaf Emblem -->
+  <g filter="url(#dropShadow)">
+    <!-- Primary Center Leaf -->
+    <path
+      d="M256 120 C256 120, 160 210, 160 300 C160 360, 202 400, 256 400 C310 400, 352 360, 352 300 C352 210, 256 120, 256 120 Z"
+      fill="url(#leafGrad)"
+    />
+
+    <!-- Inner Translucent Leaf Vein & Zen Curve -->
+    <path
+      d="M256 160 C256 160, 200 235, 200 300 C200 340, 226 370, 256 380 C240 350, 236 305, 256 250 C270 210, 256 160, 256 160 Z"
+      fill="url(#accentGrad)"
+      opacity="0.85"
+    />
+
+    <!-- Right Upward Growth Sprout Accent -->
+    <path
+      d="M256 250 C285 240, 320 255, 330 285 C335 300, 325 320, 310 325 C290 330, 270 305, 256 280 Z"
+      fill="#a7f3d0"
+      opacity="0.9"
+    />
+  </g>
+
+  <!-- Zen Pebble / Grounding Center Dot -->
+  <circle cx="256" cy="340" r="10" fill="#ffffff" opacity="0.95" />
+</svg>

@@ -11,7 +11,11 @@ import { isDateInPeriod, isCurrentPeriod, getRemainingDaysInMonth } from './peri
  * - 'transfer': -amount from txn.fromAccountId, +amount to txn.toAccountId
  */
 export function getTransactionAccountEffectMinor(txn: Transaction, accountId: string): number {
-  if (txn.accountId === accountId) {
+  const isTargetAccount =
+    txn.accountId === accountId ||
+    ((txn.accountId === 'default' || !txn.accountId) && (accountId === 'acc_primary' || accountId === 'default'));
+
+  if (isTargetAccount) {
     if (txn.type === 'income') {
       return txn.amount;
     }
@@ -20,10 +24,13 @@ export function getTransactionAccountEffectMinor(txn: Transaction, accountId: st
     }
   }
   if (txn.type === 'transfer') {
-    if (txn.fromAccountId === accountId) {
+    const isFrom = txn.fromAccountId === accountId || ((txn.fromAccountId === 'default' || !txn.fromAccountId) && (accountId === 'acc_primary' || accountId === 'default'));
+    const isTo = txn.toAccountId === accountId || ((txn.toAccountId === 'default' || !txn.toAccountId) && (accountId === 'acc_primary' || accountId === 'default'));
+
+    if (isFrom) {
       return -txn.amount;
     }
-    if (txn.toAccountId === accountId) {
+    if (isTo) {
       return txn.amount;
     }
   }
@@ -59,21 +66,28 @@ export function getAllAccountBalancesMap(accounts: Account[], transactions: Tran
     balanceMap.set(acc.id, acc.openingBalance);
   }
 
+  const primaryAccountId = accounts.find((a) => a.isActive)?.id || accounts[0]?.id;
+
   for (const txn of transactions) {
-    if (txn.type === 'income' && txn.accountId) {
-      const cur = balanceMap.get(txn.accountId);
-      if (cur !== undefined) balanceMap.set(txn.accountId, cur + txn.amount);
-    } else if ((txn.type === 'expense' || txn.type === 'saving' || txn.type === 'goal') && txn.accountId) {
-      const cur = balanceMap.get(txn.accountId);
-      if (cur !== undefined) balanceMap.set(txn.accountId, cur - txn.amount);
+    const targetAccountId = (txn.accountId && balanceMap.has(txn.accountId)) ? txn.accountId : primaryAccountId;
+
+    if (txn.type === 'income' && targetAccountId) {
+      const cur = balanceMap.get(targetAccountId);
+      if (cur !== undefined) balanceMap.set(targetAccountId, cur + txn.amount);
+    } else if ((txn.type === 'expense' || txn.type === 'saving' || txn.type === 'goal') && targetAccountId) {
+      const cur = balanceMap.get(targetAccountId);
+      if (cur !== undefined) balanceMap.set(targetAccountId, cur - txn.amount);
     } else if (txn.type === 'transfer') {
-      if (txn.fromAccountId) {
-        const fromCur = balanceMap.get(txn.fromAccountId);
-        if (fromCur !== undefined) balanceMap.set(txn.fromAccountId, fromCur - txn.amount);
+      const fromId = (txn.fromAccountId && balanceMap.has(txn.fromAccountId)) ? txn.fromAccountId : primaryAccountId;
+      const toId = (txn.toAccountId && balanceMap.has(txn.toAccountId)) ? txn.toAccountId : undefined;
+
+      if (fromId) {
+        const fromCur = balanceMap.get(fromId);
+        if (fromCur !== undefined) balanceMap.set(fromId, fromCur - txn.amount);
       }
-      if (txn.toAccountId) {
-        const toCur = balanceMap.get(txn.toAccountId);
-        if (toCur !== undefined) balanceMap.set(txn.toAccountId, toCur + txn.amount);
+      if (toId) {
+        const toCur = balanceMap.get(toId);
+        if (toCur !== undefined) balanceMap.set(toId, toCur + txn.amount);
       }
     }
   }
@@ -89,7 +103,13 @@ export function getAllAccountBalancesMap(accounts: Account[], transactions: Tran
  */
 export function getCurrentBalanceMinor(accounts: Account[], transactions: Transaction[]): number {
   if (accounts.length === 0) {
-    return 0;
+    // If no accounts array exists yet, calculate direct net sum of transactions
+    let netMinor = 0;
+    for (const txn of transactions) {
+      if (txn.type === 'income') netMinor += txn.amount;
+      else if (txn.type === 'expense' || txn.type === 'saving' || txn.type === 'goal') netMinor -= txn.amount;
+    }
+    return netMinor;
   }
 
   let totalBalanceMinor = 0;
@@ -260,31 +280,47 @@ export function calculateFlexibleAndDailyAllowance(
     };
   }
 
-  const actualMonthlyExpenses = getMonthlyExpensesMinor(transactions, period);
+  // Calculate planned wants remaining and planned needs
+  let remainingWantsMinor = 0;
+  let plannedNeedsTotal = 0;
+  let plannedNeedsCovered = 0;
+  let plannedWantsTotal = 0;
+  let plannedWantsCovered = 0;
 
-  // Calculate spending that went towards planned category envelopes
-  let plannedSpendingCovered = 0;
   for (const cp of categoryProgress) {
-    if (cp.plannedAmountMinor > 0) {
-      plannedSpendingCovered += Math.min(cp.actualAmountMinor, cp.plannedAmountMinor);
+    if (cp.priority === 'want') {
+      plannedWantsTotal += cp.plannedAmountMinor;
+      plannedWantsCovered += Math.min(cp.actualAmountMinor, cp.plannedAmountMinor);
+      remainingWantsMinor += Math.max(0, cp.plannedAmountMinor - cp.actualAmountMinor);
+    } else if (cp.plannedAmountMinor > 0) {
+      plannedNeedsTotal += cp.plannedAmountMinor;
+      plannedNeedsCovered += Math.min(cp.actualAmountMinor, cp.plannedAmountMinor);
     }
   }
 
-  // Spending on unbudgeted categories or overages beyond planned envelopes
-  const unplannedSpending = Math.max(0, actualMonthlyExpenses - plannedSpendingCovered);
+  const actualMonthlyExpenses = getMonthlyExpensesMinor(transactions, period);
+  const totalPlannedCovered = plannedNeedsCovered + plannedWantsCovered;
+  // Overages beyond planned envelopes or spending in unbudgeted categories
+  const unplannedSpending = Math.max(0, actualMonthlyExpenses - totalPlannedCovered);
 
   const totalBudgetPool = totalPlannedIncomeMinor > 0
     ? totalPlannedIncomeMinor
     : (totalPlannedExpensesMinor + plannedSavingsMinor);
 
-  const initialFlexiblePool = Math.max(0, totalBudgetPool - plannedSavingsMinor - totalPlannedExpensesMinor);
+  // Unallocated buffer kept beyond planned needs, wants, and savings
+  const initialFlexiblePool = Math.max(
+    0,
+    totalBudgetPool - plannedSavingsMinor - plannedNeedsTotal - plannedWantsTotal
+  );
 
+  const activeFlexiblePool = Math.max(0, initialFlexiblePool - unplannedSpending);
+
+  // Total available for daily/discretionary spending is remaining wants + remaining flexible pool
   let activeAvailableMinor: number;
-  if (initialFlexiblePool > 0) {
-    // User intentionally kept a flexible/unplanned pool
-    activeAvailableMinor = Math.max(0, initialFlexiblePool - unplannedSpending);
+  if (plannedWantsTotal > 0 || initialFlexiblePool > 0) {
+    activeAvailableMinor = remainingWantsMinor + activeFlexiblePool;
   } else {
-    // User allocated full budget into category envelopes
+    // If no wants or flexible pool were configured, fallback to remaining planned expenses
     activeAvailableMinor = Math.max(0, totalPlannedExpensesMinor - actualMonthlyExpenses);
   }
 

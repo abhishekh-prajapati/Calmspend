@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { envConfig } from './config/env';
 import { healthRouter } from './routes/healthRoutes';
-import { aaRouter } from './routes/aaRoutes';
+// import { aaRouter } from './routes/aaRoutes';
 import { errorHandler } from './middleware/errorHandler';
 
 export const app = express();
@@ -20,7 +20,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/health', healthRouter);
-app.use('/api/aa', aaRouter);
+// app.use('/api/aa', aaRouter); // Staged for later implementation
 
 // Global Error Handler
 app.use(errorHandler);

@@ -1,15 +1,21 @@
 {
-  "name": "PBP Personal Finance",
-  "short_name": "PBP Finance",
-  "description": "Smart personal financial budget, income, expense, and goal planner.",
+  "name": "CalmSpend - Personal Finance",
+  "short_name": "CalmSpend",
+  "description": "Zero-knowledge personal budget planner, daily spending gauge, and wealth vaults.",
   "start_url": "/",
   "id": "/",
   "display": "standalone",
-  "background_color": "#090d16",
-  "theme_color": "#090d16",
+  "background_color": "#0f172a",
+  "theme_color": "#059669",
   "orientation": "portrait",
   "categories": ["finance", "productivity", "utilities"],
   "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
     {
       "src": "/icon-192.png",
       "sizes": "192x192",

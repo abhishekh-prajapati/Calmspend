@@ -39,6 +39,24 @@ export const QuickPayModal: React.FC<QuickPayModalProps> = ({
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const activeAccounts = accounts.filter((a) => a.isActive);
+  const availableAccounts: Account[] = activeAccounts.length > 0
+    ? activeAccounts
+    : accounts.length > 0
+    ? accounts
+    : [
+        {
+          id: 'acc_primary',
+          name: 'Primary Account (Default)',
+          type: 'bank',
+          openingBalance: 0,
+          currency: 'INR',
+          isActive: true,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        },
+      ];
+
   // Initialize or reset form when item changes
   useEffect(() => {
     if (isOpen && item) {
@@ -51,9 +69,8 @@ export const QuickPayModal: React.FC<QuickPayModalProps> = ({
       setDate(new Date().toISOString().split('T')[0]);
       setError(null);
 
-      const activeAccounts = accounts.filter((a) => a.isActive);
-      if (activeAccounts.length > 0) {
-        setSelectedAccountId(activeAccounts[0].id);
+      if (availableAccounts.length > 0) {
+        setSelectedAccountId(availableAccounts[0].id);
       }
     }
   }, [isOpen, item, accounts]);
@@ -70,8 +87,6 @@ export const QuickPayModal: React.FC<QuickPayModalProps> = ({
   }, [isOpen, onClose]);
 
   if (!isOpen || !item) return null;
-
-  const activeAccounts = accounts.filter((a) => a.isActive);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -168,7 +183,7 @@ export const QuickPayModal: React.FC<QuickPayModalProps> = ({
             <label className="ui-input-label" htmlFor="quick-pay-account">
               Paid From Account *
             </label>
-            {activeAccounts.length === 0 ? (
+            {availableAccounts.length === 0 ? (
               <p className="caption" style={{ color: 'var(--color-danger)' }}>
                 No active accounts found. Please create an account first.
               </p>
@@ -180,7 +195,7 @@ export const QuickPayModal: React.FC<QuickPayModalProps> = ({
                 onChange={(e) => setSelectedAccountId(e.target.value)}
                 required
               >
-                {activeAccounts.map((acc) => (
+                {availableAccounts.map((acc) => (
                   <option key={acc.id} value={acc.id}>
                     {acc.name} ({acc.type.toUpperCase()})
                   </option>
@@ -229,7 +244,7 @@ export const QuickPayModal: React.FC<QuickPayModalProps> = ({
               type="submit"
               variant="primary"
               leftIcon={<CheckCircle size={16} />}
-              disabled={isSubmitting || activeAccounts.length === 0}
+              disabled={isSubmitting || availableAccounts.length === 0}
             >
               {isSubmitting ? 'Recording...' : 'Confirm & Pay'}
             </Button>

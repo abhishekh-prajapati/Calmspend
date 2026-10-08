@@ -1,6 +1,6 @@
 @import './tokens.css';
 
-/* CSS Reset & Box Sizing */
+/* CSS Reset & Box Sizing & Universal Scrollbar Hiding */
 *,
 *::before,
 *::after {
@@ -8,13 +8,27 @@
   margin: 0;
   padding: 0;
   -webkit-tap-highlight-color: transparent;
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE and Edge */
+}
+
+/* Hide scrollbars globally across all WebKit browsers (Chrome, Safari, Edge, Android) */
+*::-webkit-scrollbar,
+::-webkit-scrollbar,
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+#root::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
 }
 
 html {
-  font-family: var(--font-family-base);
-  background-color: #E2E8F0; /* Desktop background surrounding mobile frame */
-  color: var(--color-text-primary);
-  font-size: 16px;
+  font-family: var(--font-family-base, 'Inter', -apple-system, sans-serif);
+  background-color: #f8fafc;
+  color: var(--color-text-primary, #0f172a);
+  font-size: 14px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -27,7 +41,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: stretch;
-  background-color: #E2E8F0;
+  background-color: #f8fafc;
   overflow-x: hidden;
 }
 
@@ -38,77 +52,86 @@ body {
   align-items: stretch;
 }
 
+/* Global utility classes */
+.hidden {
+  display: none !important;
+}
+
+/* Material Symbols alignment helper */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+  line-height: 1;
+  display: inline-block;
+}
+
 /* Typography Utility Classes */
 .display-financial {
-  font-size: var(--font-size-display);
-  line-height: var(--line-height-display);
-  letter-spacing: var(--letter-spacing-display);
-  font-weight: var(--font-weight-extrabold);
-  color: var(--color-text-primary);
+  font-family: var(--font-family-display, 'Plus Jakarta Sans', sans-serif);
+  font-size: var(--font-size-display, 32px);
+  line-height: var(--line-height-display, 38px);
+  font-weight: 800;
+  color: var(--color-text-primary, #0f172a);
+  letter-spacing: -0.03em;
 }
 
 .heading-1 {
-  font-size: var(--font-size-h1);
-  line-height: var(--line-height-h1);
-  letter-spacing: var(--letter-spacing-h1);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-primary);
+  font-family: var(--font-family-display, 'Plus Jakarta Sans', sans-serif);
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 700;
+  color: var(--color-text-primary, #0f172a);
+  letter-spacing: -0.02em;
 }
 
 .heading-2 {
-  font-size: var(--font-size-h2);
-  line-height: var(--line-height-h2);
-  letter-spacing: var(--letter-spacing-h2);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
+  font-family: var(--font-family-display, 'Plus Jakarta Sans', sans-serif);
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+  color: var(--color-text-primary, #0f172a);
+  letter-spacing: -0.015em;
 }
 
 .heading-3 {
-  font-size: var(--font-size-h3);
-  line-height: var(--line-height-h3);
-  letter-spacing: var(--letter-spacing-h3);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
+  font-family: var(--font-family-display, 'Plus Jakarta Sans', sans-serif);
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--color-text-primary, #0f172a);
 }
 
 .body-text {
-  font-size: var(--font-size-body);
-  line-height: var(--line-height-body);
-  font-weight: var(--font-weight-normal);
-  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--color-text-secondary, #64748b);
 }
 
 .body-medium {
-  font-size: var(--font-size-body);
-  line-height: var(--line-height-body);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-primary);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--color-text-primary, #0f172a);
 }
 
 .body-sm {
-  font-size: var(--font-size-body-sm);
-  line-height: var(--line-height-body-sm);
-  font-weight: var(--font-weight-normal);
-  color: var(--color-text-secondary);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  color: var(--color-text-secondary, #64748b);
 }
 
 .caption {
-  font-size: var(--font-size-caption);
-  line-height: var(--line-height-caption);
-  letter-spacing: var(--letter-spacing-caption);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-muted);
-}
-
-.nav-label {
-  font-size: var(--font-size-nav);
-  line-height: var(--line-height-nav);
-  font-weight: var(--font-weight-semibold);
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 600;
+  color: var(--color-text-muted, #94a3b8);
 }
 
 /* Accessibility Focus States */
 :focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--color-primary, #059669);
   outline-offset: 2px;
 }
 
@@ -117,7 +140,6 @@ a:focus:not(:focus-visible) {
   outline: none;
 }
 
-/* Interactive Element Base */
 button {
   font-family: inherit;
   cursor: pointer;
@@ -132,4 +154,15 @@ a {
 
 input, select, textarea {
   font-family: inherit;
+}
+
+/* Hide native number spinners for clean fintech UI */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
 }

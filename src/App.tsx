@@ -7,8 +7,9 @@ import { HomePage } from './pages/HomePage';
 // Lazy-loaded secondary pages for optimized bundle chunking
 const ReportPage = lazy(() => import('./pages/ReportPage').then((m) => ({ default: m.ReportPage })));
 const PlanPage = lazy(() => import('./pages/PlanPage').then((m) => ({ default: m.PlanPage })));
-const SettingsPage = lazy(() => import('./pages/SettingsPage').then((m) => ({ default: m.SettingsPage })));
-const NetWorthPage = lazy(() => import('./pages/NetWorthPage').then((m) => ({ default: m.NetWorthPage })));
+const VaultPage = lazy(() => import('./pages/VaultPage').then((m) => ({ default: m.VaultPage })));
+const ProfilePage = lazy(() => import('./pages/ProfilePage').then((m) => ({ default: m.ProfilePage })));
+const GoalsPage = lazy(() => import('./pages/GoalsPage').then((m) => ({ default: m.GoalsPage })));
 const AddExpensePage = lazy(() => import('./pages/AddExpensePage').then((m) => ({ default: m.AddExpensePage })));
 const EditExpensePage = lazy(() => import('./pages/EditExpensePage').then((m) => ({ default: m.EditExpensePage })));
 const AddIncomePage = lazy(() => import('./pages/AddIncomePage').then((m) => ({ default: m.AddIncomePage })));
@@ -38,8 +39,11 @@ export function App() {
               <Route path="/home" element={<HomePage />} />
               <Route path="/report" element={<ReportPage />} />
               <Route path="/plan" element={<PlanPage />} />
-              <Route path="/net-worth" element={<NetWorthPage />} />
-              <Route path="/settings" element={<SettingsPage />} />
+              <Route path="/goals" element={<GoalsPage />} />
+              <Route path="/net-worth" element={<GoalsPage />} />
+              <Route path="/vault" element={<VaultPage />} />
+              <Route path="/settings" element={<Navigate to="/vault" replace />} />
+              <Route path="/profile" element={<ProfilePage />} />
               <Route path="/expenses/new" element={<AddExpensePage />} />
               <Route path="/expenses/:id/edit" element={<EditExpensePage />} />
               <Route path="/income/new" element={<AddIncomePage />} />

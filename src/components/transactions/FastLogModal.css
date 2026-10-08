@@ -1,0 +1,283 @@
+/* Neo-Glassmorphic FastLog Modal & Keypad Styles */
+.fastlog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 15, 25, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  animation: fastlogFadeIn 150ms ease-out forwards;
+}
+
+.fastlog-sheet {
+  width: 100%;
+  max-width: 480px;
+  background: linear-gradient(180deg, #161f30 0%, #0d1322 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  padding: 16px 20px 24px;
+  box-shadow: 0 -12px 32px rgba(0, 0, 0, 0.5);
+  animation: fastlogSlideUp 250ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.fastlog-handle {
+  width: 40px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  margin: 0 auto 16px;
+}
+
+.fastlog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+
+.fastlog-close-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: none;
+  color: #94a3b8;
+  font-size: 24px;
+  line-height: 1;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.fastlog-close-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+/* Segmented Capsule Switcher */
+.fastlog-capsule {
+  display: flex;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 9999px;
+  padding: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  flex: 1;
+}
+
+.fastlog-capsule__btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.fastlog-capsule__btn--active-expense {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.25);
+}
+
+.fastlog-capsule__btn--active-income {
+  background: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
+}
+
+.fastlog-capsule__btn--active-transfer {
+  background: rgba(99, 102, 241, 0.2);
+  color: #818cf8;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);
+}
+
+/* Keypad & Amount Entry */
+.fastlog-amount-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 12px 0 16px;
+  position: relative;
+}
+
+.fastlog-amount-currency {
+  font-size: 32px;
+  font-weight: 700;
+  color: #10b981;
+}
+
+.fastlog-amount-input {
+  background: transparent;
+  border: none;
+  font-size: 40px;
+  font-weight: 800;
+  color: #ffffff;
+  width: 220px;
+  text-align: center;
+  outline: none;
+  font-family: inherit;
+}
+
+.fastlog-amount-clear {
+  position: absolute;
+  right: 16px;
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.fastlog-chips {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.fastlog-chip {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 150ms ease;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.fastlog-chip:hover {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.4);
+  color: #34d399;
+}
+
+/* Category Grid & Form Fields */
+.fastlog-field {
+  margin-bottom: 16px;
+}
+
+.fastlog-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.fastlog-cat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.fastlog-cat-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 10px 8px;
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 44px;
+  transition: all 150ms ease;
+}
+
+.fastlog-cat-btn--active {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: #10b981;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
+}
+
+.fastlog-transfer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.fastlog-select,
+.fastlog-input {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  outline: none;
+  min-height: 44px;
+  box-sizing: border-box;
+}
+
+.fastlog-select:focus,
+.fastlog-input:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+.fastlog-error {
+  color: #f87171;
+  font-size: 12px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.fastlog-submit-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border: none;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px;
+  border-radius: 14px;
+  cursor: pointer;
+  min-height: 48px;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35);
+  transition: all 150ms ease;
+}
+
+.fastlog-submit-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
+}
+
+.fastlog-submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@keyframes fastlogFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fastlogSlideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowDownLeft, ArrowUpRight, ArrowLeftRight, PiggyBank, Target, CheckCircle2 } from 'lucide-react';
+import { ArrowDownLeft, PiggyBank, Target } from 'lucide-react';
 import { BottomSheet } from '../ui/BottomSheet';
 import { Badge } from '../ui/Badge';
+import { FastLogModal } from '../transactions/FastLogModal';
 import './QuickActionSheet.css';
 
 export interface QuickActionSheetProps {
@@ -10,148 +11,95 @@ export interface QuickActionSheetProps {
   onClose: () => void;
 }
 
-interface ActionOption {
-  id: string;
-  title: string;
-  subtitle: string;
-  icon: React.ReactNode;
-  iconBg: string;
-  iconColor: string;
-  isAvailable?: boolean;
-}
-
-export const QuickActionSheet: React.FC<QuickActionSheetProps> = ({
-  isOpen,
-  onClose,
-}) => {
+export const QuickActionSheet: React.FC<QuickActionSheetProps> = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
-  const [selectedNotice, setSelectedNotice] = useState<string | null>(null);
+  const [isFastLogOpen, setIsFastLogOpen] = useState(false);
 
-  const actions: ActionOption[] = [
+  const actions = [
     {
-      id: 'expense',
-      title: 'Add Expense',
-      subtitle: 'Record daily spending and purchases',
+      id: 'fast-log',
+      title: 'Fast Log Transaction',
+      subtitle: 'Instant expense, income, or bank transfer',
       icon: <ArrowDownLeft size={22} />,
-      iconBg: 'var(--color-danger-light)',
-      iconColor: 'var(--color-danger)',
-      isAvailable: true,
-    },
-    {
-      id: 'income',
-      title: 'Add Income',
-      subtitle: 'Record salary, dividend, or deposit',
-      icon: <ArrowUpRight size={22} />,
-      iconBg: 'var(--color-success-light)',
-      iconColor: 'var(--color-success)',
-      isAvailable: true,
-    },
-    {
-      id: 'transfer',
-      title: 'Transfer',
-      subtitle: 'Move funds between your accounts',
-      icon: <ArrowLeftRight size={22} />,
-      iconBg: 'var(--color-info-light)',
-      iconColor: 'var(--color-info)',
-      isAvailable: true,
+      iconBg: 'rgba(16, 185, 129, 0.15)',
+      iconColor: '#10B981',
+      badge: 'Instant ✨',
     },
     {
       id: 'saving',
       title: 'Plan Monthly Budget',
-      subtitle: 'Set up category envelopes & savings',
+      subtitle: 'Configure needs, wants & cushions',
       icon: <PiggyBank size={22} />,
-      iconBg: 'var(--color-primary-light)',
-      iconColor: 'var(--color-primary)',
-      isAvailable: true,
+      iconBg: 'rgba(99, 102, 241, 0.15)',
+      iconColor: '#6366F1',
+      badge: '3-Step',
     },
     {
       id: 'goal',
-      title: 'Goal Contribution',
-      subtitle: 'Contribute toward a financial milestone',
+      title: 'Savings & Net Worth Goals',
+      subtitle: 'Contribute toward milestone targets',
       icon: <Target size={22} />,
-      iconBg: '#FEF3C7',
-      iconColor: '#D97706',
-      isAvailable: true,
+      iconBg: 'rgba(245, 158, 11, 0.15)',
+      iconColor: '#F59E0B',
+      badge: 'Pacing',
     },
   ];
 
-  const handleActionClick = (action: ActionOption) => {
+  const handleActionClick = (id: string) => {
     onClose();
-    if (action.id === 'expense') {
-      navigate('/expenses/new');
+    if (id === 'fast-log') {
+      setIsFastLogOpen(true);
       return;
     }
-
-    if (action.id === 'income') {
-      navigate('/income/new');
+    if (id === 'goal') {
+      navigate('/goals');
       return;
     }
-
-    if (action.id === 'transfer') {
-      navigate('/transfers/new');
-      return;
-    }
-
-    if (action.id === 'goal') {
-      navigate('/plan?tab=goals');
-      return;
-    }
-
-    if (action.id === 'saving') {
+    if (id === 'saving') {
       navigate('/plan');
       return;
     }
   };
 
-  const handleClose = () => {
-    setSelectedNotice(null);
-    onClose();
-  };
-
   return (
-    <BottomSheet
-      isOpen={isOpen}
-      onClose={handleClose}
-      title="Create New"
-      subtitle="Select a transaction type to record"
-    >
-      <div className="quick-action-sheet">
-        {selectedNotice && (
-          <div className="quick-action-sheet__notice">
-            <CheckCircle2 size={18} className="quick-action-sheet__notice-icon" />
-            <span>
-              <strong>{selectedNotice}</strong> workflow will connect in a later stage.
-            </span>
-          </div>
-        )}
-
-        <div className="quick-action-sheet__list">
-          {actions.map((action) => (
-            <button
-              key={action.id}
-              type="button"
-              className="quick-action-item"
-              onClick={() => handleActionClick(action)}
-            >
-              <div
-                className="quick-action-item__icon"
-                style={{ backgroundColor: action.iconBg, color: action.iconColor }}
+    <>
+      <BottomSheet
+        isOpen={isOpen}
+        onClose={onClose}
+        title="Quick Actions"
+        subtitle="Record spending or review your wealth plan"
+      >
+        <div className="quick-action-sheet">
+          <div className="quick-action-sheet__list">
+            {actions.map((action) => (
+              <button
+                key={action.id}
+                type="button"
+                className="quick-action-item"
+                onClick={() => handleActionClick(action.id)}
               >
-                {action.icon}
-              </div>
-              <div className="quick-action-item__text">
-                <span className="quick-action-item__title">{action.title}</span>
-                <span className="quick-action-item__subtitle">{action.subtitle}</span>
-              </div>
-              {action.isAvailable ? (
-                <Badge variant="primary" size="sm">Ready</Badge>
-              ) : (
-                <Badge variant="neutral" size="sm">Preview</Badge>
-              )}
-            </button>
-          ))}
+                <div
+                  className="quick-action-item__icon"
+                  style={{ backgroundColor: action.iconBg, color: action.iconColor }}
+                >
+                  {action.icon}
+                </div>
+                <div className="quick-action-item__text">
+                  <span className="quick-action-item__title">{action.title}</span>
+                  <span className="quick-action-item__subtitle">{action.subtitle}</span>
+                </div>
+                <Badge variant="primary" size="sm">{action.badge}</Badge>
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
-    </BottomSheet>
+      </BottomSheet>
+
+      <FastLogModal
+        isOpen={isFastLogOpen}
+        onClose={() => setIsFastLogOpen(false)}
+      />
+    </>
   );
 };
+

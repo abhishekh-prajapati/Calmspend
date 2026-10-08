@@ -24,7 +24,7 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
     if (onSettingsClick) {
       onSettingsClick();
     } else {
-      navigate('/settings');
+      navigate('/profile');
     }
   };
 

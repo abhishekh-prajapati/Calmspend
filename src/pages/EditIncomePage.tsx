@@ -175,7 +175,7 @@ const EditIncomeForm: React.FC<EditIncomeFormProps> = ({ transaction }) => {
           fullWidth
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'Updating Income...' : 'Update Income'}
+          {isSubmitting ? 'Saving Income...' : 'OK / Proceed • Save Income'}
         </Button>
         <Button
           type="button"

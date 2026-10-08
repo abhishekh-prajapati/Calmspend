@@ -84,6 +84,7 @@ export function initBackButtonService(options: {
       if (
         currentPath === '/report' ||
         currentPath === '/plan' ||
+        currentPath === '/goals' ||
         currentPath === '/net-worth' ||
         currentPath === '/settings'
       ) {

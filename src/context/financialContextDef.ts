@@ -94,6 +94,14 @@ export interface FinancialContextType {
   deleteSnapshot: (id: string) => Promise<boolean>;
   refreshData: () => void;
   storageHealth: StorageHealthInfo;
+  notifications: import('../types/notification').AppNotification[];
+  unreadNotificationCount: number;
+  markNotificationAsRead: (id: string) => Promise<void>;
+  markAllNotificationsAsRead: () => Promise<void>;
+  dismissNotification: (id: string) => Promise<void>;
+  applyDailySweepRollover: (notificationId: string, surplusMinor: number) => Promise<void>;
+  applyDailySweepToGoal: (notificationId: string, goalId: string, surplusMinor: number) => Promise<void>;
+  requestNotificationPermission: () => Promise<boolean>;
 }
 
 export const FinancialContext = createContext<FinancialContextType | undefined>(undefined);

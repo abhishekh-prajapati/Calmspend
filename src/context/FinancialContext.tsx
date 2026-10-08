@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import type { Account, Category, Transaction } from '../types/transaction';
 import type { PeriodInfo } from '../types/finance';
 import type { MonthlyPlanSummary, MonthlyBudget } from '../types/budget';
@@ -36,6 +36,10 @@ import {
   calculateNetWorthSummary,
   createSnapshotFromCurrentState,
 } from '../services/netWorthCalculations';
+import { notificationRepository } from '../services/repositories/notificationRepository';
+import { notificationEngine } from '../services/notificationEngine';
+import { osNotificationService } from '../services/native/osNotificationService';
+import type { AppNotification } from '../types/notification';
 import { FinancialContext } from './financialContextDef';
 
 const recurringScheduleRepository = new RecurringScheduleRepository(localStorageAdapter);
@@ -56,6 +60,7 @@ export const FinancialProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const [manualLiabilities, setManualLiabilities] = useState<ManualLiability[]>(() => manualLiabilityRepository.getAll());
   const [financialSnapshots, setFinancialSnapshots] = useState<FinancialSnapshot[]>(() => financialSnapshotRepository.getAll());
   const [storageHealth, setStorageHealth] = useState<StorageHealthInfo>(() => localStorageAdapter.getHealthInfo());
+  const [notifications, setNotifications] = useState<AppNotification[]>(() => notificationRepository.getActive());
 
   // Current period is anchored to the present calendar month
   const [period] = useState<PeriodInfo>(() => getPeriodInfo());
@@ -72,6 +77,7 @@ export const FinancialProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     setManualAssets(manualAssetRepository.getAll());
     setManualLiabilities(manualLiabilityRepository.getAll());
     setFinancialSnapshots(financialSnapshotRepository.getAll());
+    setNotifications(notificationRepository.getActive());
     const data = localStorageAdapter.loadData();
     setRecurringSchedules(data.recurringSchedules || []);
     setScheduledBills(data.scheduledBills || []);
@@ -703,6 +709,65 @@ export const FinancialProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     return generated.filter((occ) => occ.status === 'upcoming').slice(0, 5);
   }, [recurringSchedules, scheduledBills, occurrenceRecords]);
 
+  const unreadNotificationCount = useMemo(() => {
+    return notifications.filter((n) => !n.isRead && !n.isDismissed).length;
+  }, [notifications]);
+
+  useEffect(() => {
+    const dailyAllow = summary.dailyAllowanceMinor || summary.availableToSpendMinor || 0;
+    notificationEngine.runAutomatedChecks({
+      transactions,
+      goalSummaries,
+      dailyAllowanceMinor: dailyAllow,
+    }).then(() => {
+      setNotifications(notificationRepository.getActive());
+    });
+  }, [transactions, goalSummaries, summary.dailyAllowanceMinor, summary.availableToSpendMinor]);
+
+  const markNotificationAsRead = useCallback(async (id: string): Promise<void> => {
+    notificationRepository.markAsRead(id);
+    setNotifications(notificationRepository.getActive());
+  }, []);
+
+  const markAllNotificationsAsRead = useCallback(async (): Promise<void> => {
+    notificationRepository.markAllAsRead();
+    setNotifications(notificationRepository.getActive());
+  }, []);
+
+  const dismissNotification = useCallback(async (id: string): Promise<void> => {
+    notificationRepository.dismiss(id);
+    setNotifications(notificationRepository.getActive());
+  }, []);
+
+  const applyDailySweepRollover = useCallback(
+    async (notificationId: string, surplusMinor: number): Promise<void> => {
+      const currentDaily = summary.dailyAllowanceMinor || 0;
+      monthlyBudgetRepository.setCustomDailyAllowance(period.periodKey, currentDaily + surplusMinor);
+      notificationRepository.markActionTaken(notificationId);
+      refreshData();
+    },
+    [period.periodKey, summary.dailyAllowanceMinor, refreshData],
+  );
+
+  const applyDailySweepToGoal = useCallback(
+    async (notificationId: string, goalId: string, surplusMinor: number): Promise<void> => {
+      const todayIso = new Date().toISOString().split('T')[0];
+      await createGoalContribution({
+        goalId,
+        amountMinor: surplusMinor,
+        date: todayIso,
+        note: 'Daily leftover stash 🌟',
+      });
+      notificationRepository.markActionTaken(notificationId);
+      refreshData();
+    },
+    [createGoalContribution, refreshData],
+  );
+
+  const requestNotificationPermission = useCallback(async (): Promise<boolean> => {
+    return await osNotificationService.requestPermission();
+  }, []);
+
   const value = useMemo(
     () => ({
       accounts,
@@ -778,6 +843,14 @@ export const FinancialProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       deleteSnapshot,
       refreshData,
       storageHealth,
+      notifications,
+      unreadNotificationCount,
+      markNotificationAsRead,
+      markAllNotificationsAsRead,
+      dismissNotification,
+      applyDailySweepRollover,
+      applyDailySweepToGoal,
+      requestNotificationPermission,
     }),
     [
       accounts,
@@ -852,6 +925,14 @@ export const FinancialProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       deleteSnapshot,
       refreshData,
       storageHealth,
+      notifications,
+      unreadNotificationCount,
+      markNotificationAsRead,
+      markAllNotificationsAsRead,
+      dismissNotification,
+      applyDailySweepRollover,
+      applyDailySweepToGoal,
+      requestNotificationPermission,
     ],
   );
 

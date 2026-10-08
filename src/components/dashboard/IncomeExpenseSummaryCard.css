@@ -1,0 +1,130 @@
+.calm-in-ex-banner {
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.calm-in-ex-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-border, #e2e8f0);
+  border-radius: var(--radius-xl, 16px);
+  padding: 16px 20px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  gap: 12px;
+}
+
+.calm-in-ex-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.calm-in-ex-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.calm-in-ex-icon-box {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.bg-emerald-light {
+  background-color: rgba(16, 185, 129, 0.12);
+}
+
+.text-emerald {
+  color: #059669;
+}
+
+.bg-rose-light {
+  background-color: rgba(244, 63, 94, 0.12);
+}
+
+.text-rose {
+  color: #e11d48;
+}
+
+.calm-in-ex-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-muted, #64748b);
+  letter-spacing: 0.01em;
+}
+
+.calm-in-ex-amount {
+  font-size: 17px;
+  font-weight: 700;
+  font-feature-settings: 'tnum';
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.calm-in-ex-divider {
+  width: 1px;
+  height: 36px;
+  background-color: var(--color-border, #f1f5f9);
+  flex-shrink: 0;
+}
+
+.calm-in-ex-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  padding: 6px 8px;
+  border-radius: var(--radius-md, 8px);
+  cursor: pointer;
+  min-height: 44px;
+  color: var(--color-text-secondary, #475569);
+  transition: background-color 150ms ease, transform 150ms ease;
+  flex-shrink: 0;
+}
+
+.calm-in-ex-cta-btn:hover {
+  background-color: var(--color-surface-hover, #f8fafc);
+  transform: translateX(2px);
+}
+
+.calm-in-ex-cta-btn:focus-visible {
+  outline: 2px solid var(--color-primary, #059669);
+  outline-offset: 2px;
+}
+
+.calm-in-ex-pill {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+
+.calm-in-ex-pill.pill-positive {
+  background-color: rgba(16, 185, 129, 0.12);
+  color: #059669;
+}
+
+.calm-in-ex-pill.pill-negative {
+  background-color: rgba(244, 63, 94, 0.12);
+  color: #e11d48;
+}
+
+@media (max-width: 420px) {
+  .calm-in-ex-container {
+    padding: 14px 16px;
+    gap: 8px;
+  }
+  .calm-in-ex-amount {
+    font-size: 15px;
+  }
+}

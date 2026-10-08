@@ -1,0 +1,469 @@
+/* ==========================================================================
+   CalmSpend User Profile Page Styles
+   ========================================================================== */
+
+.calm-profile-page {
+  padding: 16px 16px 120px;
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+/* 1. Profile Hero */
+.calm-profile-hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 50%, #ecfdf5 100%);
+  padding: 24px;
+  border: 1px solid #d1fae5;
+  box-shadow: 0 4px 20px -4px rgba(5, 150, 105, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.calm-profile-hero__top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.calm-profile-avatar {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  background: #059669;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+  flex-shrink: 0;
+}
+
+.calm-profile-avatar__text {
+  font-family: var(--font-family-display, 'Plus Jakarta Sans', sans-serif);
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.calm-profile-details {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.calm-profile-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.calm-profile-name {
+  font-family: var(--font-family-display, 'Plus Jakarta Sans', sans-serif);
+  font-size: 19px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.calm-profile-edit-btn {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 150ms ease;
+}
+
+.calm-profile-edit-btn:hover {
+  color: #059669;
+  background: #ecfdf5;
+}
+
+.calm-profile-name-edit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.calm-profile-name-input {
+  height: 38px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1.5px solid #059669;
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+  background: #ffffff;
+  outline: none;
+  width: 150px;
+}
+
+.calm-profile-save-btn {
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 10px;
+  background: #059669;
+  color: #ffffff;
+  border: none;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 150ms ease;
+}
+
+.calm-profile-save-btn:hover {
+  background: #047857;
+}
+
+.calm-profile-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.calm-profile-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  background: #d1fae5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.calm-profile-currency-badge {
+  padding: 3px 10px;
+  border-radius: 9999px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.calm-profile-currency-badge--interactive {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 150ms ease;
+}
+
+.calm-profile-currency-badge--interactive:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.calm-profile-currency-picker {
+  margin-top: 8px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 12px 28px -6px rgba(15, 23, 42, 0.12);
+  animation: calmFadeIn 150ms ease;
+}
+
+.calm-profile-currency-picker__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.calm-profile-currency-picker__close {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 6px;
+}
+
+.calm-profile-currency-picker__close:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.calm-profile-currency-picker__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.calm-profile-currency-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  color: #0f172a;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.calm-profile-currency-option:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.calm-profile-currency-option--active {
+  background: #ecfdf5;
+  border-color: #059669;
+  color: #065f46;
+}
+
+.calm-profile-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding-top: 8px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.calm-profile-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.calm-profile-meta-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+}
+
+.calm-profile-meta-val {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* 2. Connected Financial Ledgers Card */
+.calm-settings-card {
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #e2e8f0;
+  padding: 22px 24px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.calm-settings-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.calm-settings-card__title {
+  font-family: var(--font-family-display, 'Plus Jakarta Sans', sans-serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.calm-settings-card__sub {
+  font-size: 12px;
+  color: #64748b;
+  margin: 2px 0 0;
+}
+
+.calm-accounts-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.calm-acc-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.calm-acc-row__left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.calm-acc-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family-display, 'Plus Jakarta Sans', sans-serif);
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.calm-acc-avatar--indigo {
+  background: #e0e7ff;
+  color: #4338ca;
+  border: 1px solid #c7d2fe;
+}
+
+.calm-acc-avatar--emerald {
+  background: #ecfdf5;
+  color: #059669;
+  border: 1px solid #a7f3d0;
+}
+
+.calm-acc-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.calm-acc-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.calm-acc-type-pill {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  background: #e2e8f0;
+  color: #475569;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.calm-acc-balance {
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+  display: block;
+}
+
+.calm-acc-status-pill {
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* Profile Vault Link Card */
+.calm-profile-vault-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 150ms ease;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+}
+
+.calm-profile-vault-card:hover {
+  border-color: #059669;
+  background: #f0fdf4;
+}
+
+.calm-profile-vault-card__left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.calm-profile-vault-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #059669;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calm-profile-vault-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.calm-profile-vault-desc {
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* Toast Notification */
+.calm-trends-toast {
+  position: fixed;
+  bottom: 84px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0f172a;
+  color: #ffffff;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  z-index: 1200;
+  animation: calmFadeIn 200ms ease;
+  white-space: nowrap;
+}
+
+.calm-rbi-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #059669;
+}

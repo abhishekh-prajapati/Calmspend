@@ -44,8 +44,8 @@ export const RecentTransactionsCard: React.FC<RecentTransactionsCardProps> = ({
     try {
       await deleteTransaction(deletingTxn.id);
       setDeletingTxn(null);
-    } catch (err) {
-      console.error('Failed to delete transaction', err);
+    } catch {
+      // Error handled silently or through UI toast
     } finally {
       setIsDeleting(false);
     }

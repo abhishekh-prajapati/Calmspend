@@ -1,0 +1,116 @@
+.calm-dash-shortcuts {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.calm-shortcut-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 10px 16px;
+  border-radius: var(--radius-lg, 12px);
+  cursor: pointer;
+  transition: transform 150ms ease, box-shadow 150ms ease, background-color 150ms ease, border-color 150ms ease;
+  user-select: none;
+}
+
+/* Income Shortcut Button Style */
+.calm-shortcut-btn--income {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1.5px solid rgba(16, 185, 129, 0.28);
+  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.08);
+}
+
+.calm-shortcut-btn--income:hover {
+  transform: translateY(-1px);
+  background-color: rgba(16, 185, 129, 0.14);
+  border-color: rgba(16, 185, 129, 0.45);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.18);
+}
+
+.calm-shortcut-btn--income:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(16, 185, 129, 0.1);
+}
+
+.calm-shortcut-btn--income .calm-shortcut-icon {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: #059669;
+}
+
+.calm-shortcut-btn--income .calm-shortcut-label {
+  color: #047857;
+}
+
+.calm-shortcut-btn--income:focus-visible {
+  outline: 2px solid #059669;
+  outline-offset: 2px;
+}
+
+/* Expense Shortcut Button Style */
+.calm-shortcut-btn--expense {
+  background: rgba(244, 63, 94, 0.08);
+  border: 1.5px solid rgba(244, 63, 94, 0.28);
+  box-shadow: 0 1px 3px rgba(244, 63, 94, 0.08);
+}
+
+.calm-shortcut-btn--expense:hover {
+  transform: translateY(-1px);
+  background-color: rgba(244, 63, 94, 0.14);
+  border-color: rgba(244, 63, 94, 0.45);
+  box-shadow: 0 4px 14px rgba(244, 63, 94, 0.18);
+}
+
+.calm-shortcut-btn--expense:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(244, 63, 94, 0.1);
+}
+
+.calm-shortcut-btn--expense .calm-shortcut-icon {
+  background-color: rgba(244, 63, 94, 0.2);
+  color: #e11d48;
+}
+
+.calm-shortcut-btn--expense .calm-shortcut-label {
+  color: #be123c;
+}
+
+.calm-shortcut-btn--expense:focus-visible {
+  outline: 2px solid #e11d48;
+  outline-offset: 2px;
+}
+
+.calm-shortcut-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.calm-shortcut-label {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 400px) {
+  .calm-dash-shortcuts {
+    gap: 8px;
+  }
+  .calm-shortcut-btn {
+    padding: 8px 12px;
+    gap: 6px;
+  }
+  .calm-shortcut-label {
+    font-size: 13px;
+  }
+}
